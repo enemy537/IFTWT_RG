@@ -1,0 +1,55 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/avell/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_36711/fast"
+/usr/bin/make -f CMakeFiles/cmTC_36711.dir/build.make CMakeFiles/cmTC_36711.dir/build
+make[1]: Entering directory '/home/avell/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_36711.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_36711.dir/CheckSymbolExists.c.o   -c /home/avell/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_36711
+/home/avell/Downloads/clion-2017.3.4/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_36711.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_36711.dir/CheckSymbolExists.c.o  -o cmTC_36711 
+CMakeFiles/cmTC_36711.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_36711.dir/build.make:97: recipe for target 'cmTC_36711' failed
+make[1]: *** [cmTC_36711] Error 1
+make[1]: Leaving directory '/home/avell/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_36711/fast' failed
+make: *** [cmTC_36711/fast] Error 2
+
+File /home/avell/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/avell/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_e0c6b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e0c6b.dir/build.make CMakeFiles/cmTC_e0c6b.dir/build
+make[1]: Entering directory '/home/avell/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e0c6b.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_e0c6b.dir/CheckFunctionExists.c.o   -c /home/avell/Downloads/clion-2017.3.4/bin/cmake/share/cmake-3.9/Modules/CheckFunctionExists.c
+Linking C executable cmTC_e0c6b
+/home/avell/Downloads/clion-2017.3.4/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e0c6b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_e0c6b.dir/CheckFunctionExists.c.o  -o cmTC_e0c6b -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_e0c6b.dir/build.make:97: recipe for target 'cmTC_e0c6b' failed
+make[1]: *** [cmTC_e0c6b] Error 1
+make[1]: Leaving directory '/home/avell/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_e0c6b/fast' failed
+make: *** [cmTC_e0c6b/fast] Error 2
+
+
