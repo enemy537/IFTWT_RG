@@ -6,8 +6,22 @@
 
 #IncludeRegexTransform: 
 
+../boost_helper/exercices_toolbox.h
+boost/graph/graph_traits.hpp
+-
+boost/graph/adjacency_list.hpp
+-
+boost/graph/graphviz.hpp
+-
+fstream
+-
+
 /home/avell/CLionProjects/IFTWT_RG/flat_point.hpp
 pcl/segmentation/region_growing.h
+-
+pcl/filters/passthrough.h
+-
+pcl/filters/extract_indices.h
 -
 
 /home/avell/CLionProjects/IFTWT_RG/main.cpp
@@ -33,6 +47,26 @@ pcl/filters/extract_indices.h
 -
 flat_point.hpp
 /home/avell/CLionProjects/IFTWT_RG/flat_point.hpp
+pcl/octree/octree_pointcloud_adjacency.h
+-
+pcl/filters/voxel_grid.h
+-
+vtkRenderWindow.h
+-
+vtkCubeSource.h
+-
+vtkCleanPolyData.h
+-
+exercices_toolbox.h
+-
+opencv2/opencv.hpp
+-
+boost/graph/graph_traits.hpp
+-
+boost/graph/adjacency_list.hpp
+-
+pcl/kdtree/flann.h
+-
 
 /usr/include/eigen3/Eigen/Cholesky
 Core
@@ -1178,6 +1212,10 @@ Eigen/Eigenvalues
 pcl/common/impl/eigen.hpp
 -
 
+/usr/include/pcl-1.8/pcl/common/geometry.h
+Eigen/Core
+-
+
 /usr/include/pcl-1.8/pcl/common/impl/accumulators.hpp
 map
 -
@@ -1247,6 +1285,8 @@ locale
 -
 pcl/common/impl/io.hpp
 -
+
+/usr/include/pcl-1.8/pcl/common/point_operators.h
 
 /usr/include/pcl-1.8/pcl/common/point_tests.h
 Eigen/src/StlSupport/details.h
@@ -1434,10 +1474,30 @@ pcl/filters/passthrough.h
 pcl/common/io.h
 -
 
+/usr/include/pcl-1.8/pcl/filters/impl/voxel_grid.hpp
+pcl/common/centroid.h
+-
+pcl/common/common.h
+-
+pcl/common/io.h
+-
+pcl/filters/voxel_grid.h
+-
+
 /usr/include/pcl-1.8/pcl/filters/passthrough.h
 pcl/filters/filter_indices.h
 -
 pcl/filters/impl/passthrough.hpp
+-
+
+/usr/include/pcl-1.8/pcl/filters/voxel_grid.h
+pcl/filters/boost.h
+-
+pcl/filters/filter.h
+-
+map
+-
+pcl/filters/impl/voxel_grid.hpp
 -
 
 /usr/include/pcl-1.8/pcl/for_each_type.h
@@ -1472,6 +1532,20 @@ pcl/ModelCoefficients.h
 
 /usr/include/pcl-1.8/pcl/impl/cloud_iterator.hpp
 pcl/cloud_iterator.h
+-
+
+/usr/include/pcl-1.8/pcl/impl/instantiate.hpp
+pcl/pcl_config.h
+-
+boost/preprocessor/seq/for_each.hpp
+-
+boost/preprocessor/seq/for_each_product.hpp
+-
+boost/preprocessor/seq/to_tuple.hpp
+-
+boost/preprocessor/cat.hpp
+-
+boost/preprocessor/expand.hpp
 -
 
 /usr/include/pcl-1.8/pcl/impl/pcl_base.hpp
@@ -1642,12 +1716,46 @@ boost/shared_array.hpp
 pcl/kdtree/impl/kdtree_flann.hpp
 -
 
+/usr/include/pcl-1.8/pcl/octree/boost.h
+boost/graph/adjacency_list.hpp
+-
+boost/function.hpp
+-
+
+/usr/include/pcl-1.8/pcl/octree/impl/octree2buf_base.hpp
+
+/usr/include/pcl-1.8/pcl/octree/impl/octree_base.hpp
+vector
+-
+pcl/impl/instantiate.hpp
+-
+pcl/point_types.h
+-
+pcl/octree/octree.h
+-
+
+/usr/include/pcl-1.8/pcl/octree/impl/octree_iterator.hpp
+vector
+-
+assert.h
+-
+pcl/common/common.h
+-
+
 /usr/include/pcl-1.8/pcl/octree/impl/octree_pointcloud.hpp
 vector
 -
 assert.h
 -
 pcl/common/common.h
+-
+
+/usr/include/pcl-1.8/pcl/octree/impl/octree_pointcloud_adjacency.hpp
+pcl/octree/octree_pointcloud_adjacency.h
+-
+
+/usr/include/pcl-1.8/pcl/octree/impl/octree_pointcloud_voxelcentroid.hpp
+pcl/octree/octree_pointcloud_voxelcentroid.h
 -
 
 /usr/include/pcl-1.8/pcl/octree/impl/octree_search.hpp
@@ -1658,6 +1766,46 @@ pcl/point_types.h
 pcl/common/common.h
 -
 assert.h
+-
+
+/usr/include/pcl-1.8/pcl/octree/octree.h
+pcl/octree/octree_base.h
+-
+pcl/octree/octree2buf_base.h
+-
+pcl/octree/octree_iterator.h
+-
+pcl/octree/octree_pointcloud.h
+-
+pcl/octree/octree_pointcloud_density.h
+-
+pcl/octree/octree_pointcloud_occupancy.h
+-
+pcl/octree/octree_pointcloud_singlepoint.h
+-
+pcl/octree/octree_pointcloud_pointvector.h
+-
+pcl/octree/octree_pointcloud_changedetector.h
+-
+pcl/octree/octree_pointcloud_voxelcentroid.h
+-
+pcl/octree/octree_search.h
+-
+
+/usr/include/pcl-1.8/pcl/octree/octree2buf_base.h
+vector
+-
+octree_nodes.h
+/usr/include/pcl-1.8/pcl/octree/octree_nodes.h
+octree_container.h
+/usr/include/pcl-1.8/pcl/octree/octree_container.h
+octree_key.h
+/usr/include/pcl-1.8/pcl/octree/octree_key.h
+octree_iterator.h
+/usr/include/pcl-1.8/pcl/octree/octree_iterator.h
+stdio.h
+-
+string.h
 -
 
 /usr/include/pcl-1.8/pcl/octree/octree_base.h
@@ -1682,6 +1830,20 @@ vector
 cstddef
 -
 pcl/pcl_macros.h
+-
+
+/usr/include/pcl-1.8/pcl/octree/octree_impl.h
+pcl/octree/octree.h
+-
+pcl/octree/impl/octree_base.hpp
+-
+pcl/octree/impl/octree2buf_base.hpp
+-
+pcl/octree/impl/octree_pointcloud.hpp
+-
+pcl/octree/impl/octree_iterator.hpp
+-
+pcl/octree/impl/octree_search.hpp
 -
 
 /usr/include/pcl-1.8/pcl/octree/octree_iterator.h
@@ -1738,6 +1900,58 @@ algorithm
 iostream
 -
 pcl/octree/impl/octree_pointcloud.hpp
+-
+
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud_adjacency.h
+pcl/console/print.h
+-
+pcl/common/geometry.h
+-
+pcl/octree/boost.h
+-
+pcl/octree/octree_impl.h
+-
+pcl/octree/octree_pointcloud_adjacency_container.h
+-
+set
+-
+list
+-
+pcl/octree/impl/octree_pointcloud_adjacency.hpp
+-
+
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud_adjacency_container.h
+
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud_changedetector.h
+octree_pointcloud.h
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud.h
+
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud_density.h
+octree_pointcloud.h
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud.h
+
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud_occupancy.h
+octree_pointcloud.h
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud.h
+
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud_pointvector.h
+octree_pointcloud.h
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud.h
+
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud_singlepoint.h
+octree_pointcloud.h
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud.h
+
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud_voxelcentroid.h
+octree_pointcloud.h
+/usr/include/pcl-1.8/pcl/octree/octree_pointcloud.h
+pcl/common/point_operators.h
+-
+pcl/point_types.h
+-
+pcl/register_point_struct.h
+-
+pcl/octree/impl/octree_pointcloud_voxelcentroid.hpp
 -
 
 /usr/include/pcl-1.8/pcl/octree/octree_search.h
@@ -2422,6 +2636,12 @@ vtkUnsignedCharArray.h
 vtkCellType.h
 /usr/include/vtk-6.2/vtkCellType.h
 
+/usr/include/vtk-6.2/vtkCleanPolyData.h
+vtkFiltersCoreModule.h
+/usr/include/vtk-6.2/vtkFiltersCoreModule.h
+vtkPolyDataAlgorithm.h
+/usr/include/vtk-6.2/vtkPolyDataAlgorithm.h
+
 /usr/include/vtk-6.2/vtkCollection.h
 vtkCommonCoreModule.h
 /usr/include/vtk-6.2/vtkCommonCoreModule.h
@@ -2461,6 +2681,12 @@ vtkRenderingCoreModule.h
 /usr/include/vtk-6.2/vtkRenderingCoreModule.h
 vtkObject.h
 /usr/include/vtk-6.2/vtkObject.h
+
+/usr/include/vtk-6.2/vtkCubeSource.h
+vtkFiltersSourcesModule.h
+/usr/include/vtk-6.2/vtkFiltersSourcesModule.h
+vtkPolyDataAlgorithm.h
+/usr/include/vtk-6.2/vtkPolyDataAlgorithm.h
 
 /usr/include/vtk-6.2/vtkDataArray.h
 vtkCommonCoreModule.h
@@ -2916,6 +3142,12 @@ vtkRenderingCoreModule.h
 vtkObject.h
 /usr/include/vtk-6.2/vtkObject.h
 
+/usr/include/vtk-6.2/vtkRenderWindow.h
+vtkRenderingCoreModule.h
+/usr/include/vtk-6.2/vtkRenderingCoreModule.h
+vtkWindow.h
+/usr/include/vtk-6.2/vtkWindow.h
+
 /usr/include/vtk-6.2/vtkRenderer.h
 vtkRenderingCoreModule.h
 /usr/include/vtk-6.2/vtkRenderingCoreModule.h
@@ -3189,6 +3421,12 @@ vtkABI.h
 /usr/include/vtk-6.2/vtkABI.h
 windows.h
 -
+
+/usr/include/vtk-6.2/vtkWindow.h
+vtkCommonCoreModule.h
+/usr/include/vtk-6.2/vtkCommonCoreModule.h
+vtkObject.h
+/usr/include/vtk-6.2/vtkObject.h
 
 /usr/include/x86_64-linux-gnu/bits/mman-linux.h
 

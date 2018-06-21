@@ -1,7 +1,9 @@
-//
+//w
 // Created by avell on 16/03/18.
 //
 #include <pcl/segmentation/region_growing.h>
+#include <pcl/filters/passthrough.h>
+#include <pcl/filters/extract_indices.h>
 
 template <typename PointT, typename NormalT>
 class FlatPoint : public pcl::RegionGrowing<PointT,NormalT>{
@@ -70,8 +72,8 @@ protected:
 
             centroids_cloud_->points.push_back(this->input_->points[nn_indices[0]]);
 
-            std::vector<int> nn_indices (this->neighbour_number_);
-            std::vector<float> nn_dists (this->neighbour_number_);
+            nn_indices[0] = this->neighbour_number_;
+            nn_dists[0]   = this->neighbour_number_;
 
             this->search_->nearestKSearch(p,this->neighbour_number_, nn_indices, nn_dists);
 

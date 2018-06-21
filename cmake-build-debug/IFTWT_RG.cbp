@@ -5,7 +5,7 @@
 		<Option title="IFTWT_RG"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\share\;CMake Files\..\..\..\..\usr\share\pcl-1.8\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\cmake\;CMake Files\..\..\..\..\usr\lib\cmake\vtk-6.2\;CMake Files\..\..\..\..\usr\lib\cmake\vtk-6.2\Modules\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5OpenGL\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Sql\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5WebKitWidgets\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5WebKit\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Network\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\share\;CMake Files\..\..\..\..\usr\share\pcl-1.8\;CMake Files\..\..\..\..\usr\share\OpenCV\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\cmake\;CMake Files\..\..\..\..\usr\lib\cmake\vtk-6.2\;CMake Files\..\..\..\..\usr\lib\cmake\vtk-6.2\Modules\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5OpenGL\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Sql\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5WebKitWidgets\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5WebKit\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Network\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/avell/CLionProjects/IFTWT_RG/cmake-build-debug"/>
@@ -78,13 +78,15 @@
 					<Add directory="/usr/lib/openmpi/include/openmpi"/>
 					<Add directory="/usr/include/python2.7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include/hdf5/serial"/>
+					<Add directory="/usr/include/hdf5/openmpi"/>
 					<Add directory="/usr/include/libxml2"/>
 					<Add directory="/usr/include/tcl"/>
+					<Add directory="/usr/include/opencv"/>
 					<Add directory="/usr/include/pcl-1.8"/>
 					<Add directory="/usr/include/eigen3"/>
 					<Add directory="/usr/include/ni"/>
 					<Add directory="/usr/include/openni2"/>
+					<Add directory="/home/avell/CLionProjects/IFTWT_RG/boost_helper"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
@@ -146,13 +148,15 @@
 					<Add directory="/usr/lib/openmpi/include/openmpi"/>
 					<Add directory="/usr/include/python2.7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include/hdf5/serial"/>
+					<Add directory="/usr/include/hdf5/openmpi"/>
 					<Add directory="/usr/include/libxml2"/>
 					<Add directory="/usr/include/tcl"/>
+					<Add directory="/usr/include/opencv"/>
 					<Add directory="/usr/include/pcl-1.8"/>
 					<Add directory="/usr/include/eigen3"/>
 					<Add directory="/usr/include/ni"/>
 					<Add directory="/usr/include/openni2"/>
+					<Add directory="/home/avell/CLionProjects/IFTWT_RG/boost_helper"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
@@ -177,6 +181,9 @@
 		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/flat_point.hpp">
 			<Option target="IFTWT_RG"/>
 		</Unit>
+		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/graph.hpp">
+			<Option target="IFTWT_RG"/>
+		</Unit>
 		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/main.cpp">
 			<Option target="IFTWT_RG"/>
 		</Unit>
@@ -189,6 +196,18 @@
 		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/../../../../usr/share/pcl-1.8/PCLConfig.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\share\pcl-1.8\"/>
 		</Unit>
+		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/../../../../usr/share/OpenCV/OpenCVConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\share\OpenCV\"/>
+		</Unit>
+		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/../../../../usr/share/OpenCV/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\share\OpenCV\"/>
+		</Unit>
+		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/../../../../usr/share/OpenCV/OpenCVModules.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\share\OpenCV\"/>
+		</Unit>
+		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/../../../../usr/share/OpenCV/OpenCVModules-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\share\OpenCV\"/>
+		</Unit>
 		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/../../../../usr/lib/cmake/vtk-6.2/VTKConfigVersion.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\vtk-6.2\"/>
 		</Unit>
@@ -199,6 +218,18 @@
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\vtk-6.2\"/>
 		</Unit>
 		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/../../../../usr/lib/cmake/vtk-6.2/VTKTargets-none.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\vtk-6.2\"/>
+		</Unit>
+		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/../../../../usr/lib/cmake/vtk-6.2/vtkModuleAPI.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\vtk-6.2\"/>
+		</Unit>
+		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/../../../../usr/lib/cmake/vtk-6.2/UseVTK.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\vtk-6.2\"/>
+		</Unit>
+		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/../../../../usr/lib/cmake/vtk-6.2/VTKConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\vtk-6.2\"/>
+		</Unit>
+		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/../../../../usr/lib/cmake/vtk-6.2/VTKConfig.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\vtk-6.2\"/>
 		</Unit>
 		<Unit filename="/home/avell/CLionProjects/IFTWT_RG/../../../../usr/lib/cmake/vtk-6.2/vtkModuleAPI.cmake">
