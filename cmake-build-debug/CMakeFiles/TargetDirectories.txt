@@ -1,3 +1,0 @@
-/home/avell/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/avell/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/avell/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/IFTWT_RG.dir

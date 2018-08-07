@@ -1,9 +1,10 @@
-//w
+//w 
 // Created by avell on 16/03/18.
 //
 #include <pcl/segmentation/region_growing.h>
 #include <pcl/filters/passthrough.h>
 #include <pcl/filters/extract_indices.h>
+#include <pcl/common/centroid.h>
 
 template <typename PointT, typename NormalT>
 class FlatPoint : public pcl::RegionGrowing<PointT,NormalT>{

@@ -1,7 +1,31 @@
-/home/avell/Downloads/clion-2017.3.4/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/avell/CLionProjects/IFTWT_RG
+/opt/clion-2018.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/pedro/CLionProjects/IFTWT_RG
+-- The C compiler identification is GNU 7.3.0
+-- The CXX compiler identification is GNU 7.3.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
 -- Checking for module 'eigen3'
---   Found eigen3, version 3.2.92
--- Boost version: 1.58.0
+--   Found eigen3, version 3.3.4
+-- Found eigen: /usr/include/eigen3  
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Boost version: 1.65.1
 -- Found the following Boost libraries:
 --   system
 --   filesystem
@@ -12,14 +36,14 @@
 --   chrono
 --   atomic
 --   regex
--- Checking for module 'flann'
---   Found flann, version 1.8.4
--- Checking for module 'flann'
---   Found flann, version 1.8.4
 -- Checking for module 'libopenni'
---   Found libopenni, version 1.5.4.0
+--   No package 'libopenni' found
+-- Could NOT find openni (missing: OPENNI_LIBRARY OPENNI_INCLUDE_DIRS) 
+** WARNING ** io features related to openni will be disabled
 -- Checking for module 'libopenni2'
---   Found libopenni2, version 2.2.0.3
+--   No package 'libopenni2' found
+-- Could NOT find OpenNI2 (missing: OPENNI2_LIBRARY OPENNI2_INCLUDE_DIRS) 
+** WARNING ** io features related to openni2 will be disabled
 -- Could NOT find ensenso (missing: ENSENSO_LIBRARY ENSENSO_INCLUDE_DIR) 
 ** WARNING ** io features related to ensenso will be disabled
 -- Could NOT find DAVIDSDK (missing: DAVIDSDK_LIBRARY DAVIDSDK_INCLUDE_DIR) 
@@ -28,20 +52,19 @@
 ** WARNING ** io features related to dssdk will be disabled
 ** WARNING ** io features related to pcap will be disabled
 ** WARNING ** io features related to png will be disabled
--- The imported target "vtkRenderingPythonTkWidgets" references the file
-   "/usr/lib/x86_64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
-but this file does not exist.  Possible reasons include:
-* The file was deleted, renamed, or moved to another location.
-* An install or uninstall procedure did not complete successfully.
-* The installation package was faulty and contained
-   "/usr/lib/cmake/vtk-6.2/VTKTargets.cmake"
-but not all the files it references.
-
+-- Found libusb-1.0: /usr/include  
 ** WARNING ** io features related to libusb-1.0 will be disabled
+-- Checking for module 'flann'
+--   Found flann, version 1.9.1
+-- Found Flann: /usr/lib/x86_64-linux-gnu/libflann_cpp_s.a  
 -- Checking for module 'libopenni'
---   Found libopenni, version 1.5.4.0
+--   No package 'libopenni' found
+-- Could NOT find openni (missing: OPENNI_LIBRARY OPENNI_INCLUDE_DIRS) 
+** WARNING ** visualization features related to openni will be disabled
 -- Checking for module 'libopenni2'
---   Found libopenni2, version 2.2.0.3
+--   No package 'libopenni2' found
+-- Could NOT find OpenNI2 (missing: OPENNI2_LIBRARY OPENNI2_INCLUDE_DIRS) 
+** WARNING ** visualization features related to openni2 will be disabled
 -- Could NOT find ensenso (missing: ENSENSO_LIBRARY ENSENSO_INCLUDE_DIR) 
 ** WARNING ** visualization features related to ensenso will be disabled
 -- Could NOT find DAVIDSDK (missing: DAVIDSDK_LIBRARY DAVIDSDK_INCLUDE_DIR) 
@@ -50,30 +73,67 @@ but not all the files it references.
 ** WARNING ** visualization features related to dssdk will be disabled
 -- Could NOT find RSSDK (missing: _RSSDK_LIBRARIES) 
 ** WARNING ** visualization features related to rssdk will be disabled
--- Checking for module 'libopenni'
---   Found libopenni, version 1.5.4.0
+-- Found qhull: /usr/lib/x86_64-linux-gnu/libqhull.so  
 -- looking for PCL_COMMON
+-- Found PCL_COMMON: /usr/local/lib/libpcl_common.so  
 -- looking for PCL_OCTREE
--- looking for PCL_KDTREE
--- looking for PCL_SEARCH
--- looking for PCL_SAMPLE_CONSENSUS
--- looking for PCL_FILTERS
+-- Found PCL_OCTREE: /usr/local/lib/libpcl_octree.so  
 -- looking for PCL_IO
+-- Found PCL_IO: /usr/local/lib/libpcl_io.so  
+-- looking for PCL_KDTREE
+-- Found PCL_KDTREE: /usr/local/lib/libpcl_kdtree.so  
+-- looking for PCL_SEARCH
+-- Found PCL_SEARCH: /usr/local/lib/libpcl_search.so  
+-- looking for PCL_SAMPLE_CONSENSUS
+-- Found PCL_SAMPLE_CONSENSUS: /usr/local/lib/libpcl_sample_consensus.so  
+-- looking for PCL_FILTERS
+-- Found PCL_FILTERS: /usr/local/lib/libpcl_filters.so  
 -- looking for PCL_2D
--- looking for PCL_FEATURES
--- looking for PCL_REGISTRATION
--- looking for PCL_KEYPOINTS
+-- Found PCL_2D: /usr/local/include/pcl-1.8  
 -- looking for PCL_GEOMETRY
+-- Found PCL_GEOMETRY: /usr/local/include/pcl-1.8  
+-- looking for PCL_FEATURES
+-- Found PCL_FEATURES: /usr/local/lib/libpcl_features.so  
 -- looking for PCL_ML
+-- Found PCL_ML: /usr/local/lib/libpcl_ml.so  
 -- looking for PCL_SEGMENTATION
+-- Found PCL_SEGMENTATION: /usr/local/lib/libpcl_segmentation.so  
 -- looking for PCL_VISUALIZATION
--- looking for PCL_OUTOFCORE
--- looking for PCL_STEREO
+-- Found PCL_VISUALIZATION: /usr/local/lib/libpcl_visualization.so  
 -- looking for PCL_SURFACE
--- looking for PCL_RECOGNITION
--- looking for PCL_PEOPLE
+-- Found PCL_SURFACE: /usr/local/lib/libpcl_surface.so  
+-- looking for PCL_REGISTRATION
+-- Found PCL_REGISTRATION: /usr/local/lib/libpcl_registration.so  
+-- looking for PCL_KEYPOINTS
+-- Found PCL_KEYPOINTS: /usr/local/lib/libpcl_keypoints.so  
 -- looking for PCL_TRACKING
--- looking for PCL_APPS
--- Configuring done
--- Generating done
--- Build files have been written to: /home/avell/CLionProjects/IFTWT_RG/cmake-build-debug
+-- Found PCL_TRACKING: /usr/local/lib/libpcl_tracking.so  
+-- looking for PCL_RECOGNITION
+-- Found PCL_RECOGNITION: /usr/local/lib/libpcl_recognition.so  
+-- looking for PCL_STEREO
+-- Found PCL_STEREO: /usr/local/lib/libpcl_stereo.so  
+-- looking for PCL_OUTOFCORE
+-- Found PCL_OUTOFCORE: /usr/local/lib/libpcl_outofcore.so  
+-- looking for PCL_PEOPLE
+-- Found PCL_PEOPLE: /usr/local/lib/libpcl_people.so  
+-- Found PCL: /usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;/usr/lib/x86_64-linux-gnu/libboost_thread.so;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;/usr/lib/x86_64-linux-gnu/libboost_iostreams.so;/usr/lib/x86_64-linux-gnu/libboost_serialization.so;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;/usr/lib/x86_64-linux-gnu/libboost_regex.so;optimized;/usr/local/lib/libpcl_common.so;debug;/usr/local/lib/libpcl_common.so;optimized;/usr/local/lib/libpcl_octree.so;debug;/usr/local/lib/libpcl_octree.so;vtkChartsCore;vtkCommonColor;vtkCommonCore;vtksys;vtkCommonDataModel;vtkCommonMath;vtkCommonMisc;vtkCommonSystem;vtkCommonTransforms;vtkCommonExecutionModel;vtkFiltersGeneral;vtkCommonComputationalGeometry;vtkFiltersCore;vtkInfovisCore;vtkFiltersExtraction;vtkFiltersStatistics;vtkImagingFourier;vtkImagingCore;vtkalglib;vtkRenderingContext2D;vtkRenderingCore;vtkFiltersGeometry;vtkFiltersSources;vtkRenderingFreeType;vtkfreetype;vtkzlib;vtkDICOMParser;vtkDomainsChemistry;vtkIOLegacy;vtkIOCore;vtklz4;vtkIOXMLParser;vtkexpat;vtkDomainsChemistryOpenGL2;vtkRenderingOpenGL2;vtkglew;vtkFiltersAMR;vtkIOXML;vtkParallelCore;vtkFiltersFlowPaths;vtkFiltersGeneric;vtkFiltersHybrid;vtkImagingSources;vtkFiltersHyperTree;vtkFiltersImaging;vtkImagingGeneral;vtkFiltersModeling;vtkFiltersParallel;vtkFiltersParallelImaging;vtkFiltersPoints;vtkFiltersProgrammable;vtkFiltersSMP;vtkFiltersSelection;vtkFiltersTexture;vtkFiltersTopology;vtkFiltersVerdict;verdict;vtkGeovisCore;vtkIOImage;vtkmetaio;vtkjpeg;vtkpng;vtktiff;vtkInfovisLayout;vtkImagingHybrid;vtkInteractionStyle;vtkInteractionWidgets;vtkImagingColor;vtkRenderingAnnotation;vtkRenderingVolume;vtkViewsCore;vtkproj4;vtkIOAMR;vtkhdf5_hl;vtkhdf5;vtkIOEnSight;vtkIOExodus;vtkexoIIc;vtkNetCDF;vtkIOExport;vtkRenderingGL2PSOpenGL2;vtkgl2ps;vtklibharu;vtkIOExportOpenGL2;vtkIOGeometry;vtkIOImport;vtkIOInfovis;vtklibxml2;vtkIOLSDyna;vtkIOMINC;vtkIOMovie;vtkoggtheora;vtkIONetCDF;vtknetcdfcpp;vtkIOPLY;vtkIOParallel;vtkjsoncpp;vtkIOParallelXML;vtkIOSQL;vtksqlite;vtkIOTecplotTable;vtkIOVideo;vtkImagingMath;vtkImagingMorphological;vtkImagingStatistics;vtkImagingStencil;vtkInteractionImage;vtkRenderingContextOpenGL2;vtkRenderingImage;vtkRenderingLOD;vtkRenderingLabel;vtkRenderingVolumeOpenGL2;vtkViewsContext2D;vtkViewsInfovis;optimized;/usr/local/lib/libpcl_io.so;debug;/usr/local/lib/libpcl_io.so;optimized;/usr/lib/x86_64-linux-gnu/libflann_cpp_s.a;debug;/usr/lib/x86_64-linux-gnu/libflann_cpp_s.a;optimized;/usr/local/lib/libpcl_kdtree.so;debug;/usr/local/lib/libpcl_kdtree.so;optimized;/usr/local/lib/libpcl_search.so;debug;/usr/local/lib/libpcl_search.so;optimized;/usr/local/lib/libpcl_sample_consensus.so;debug;/usr/local/lib/libpcl_sample_consensus.so;optimized;/usr/local/lib/libpcl_filters.so;debug;/usr/local/lib/libpcl_filters.so;optimized;/usr/local/lib/libpcl_features.so;debug;/usr/local/lib/libpcl_features.so;optimized;/usr/local/lib/libpcl_ml.so;debug;/usr/local/lib/libpcl_ml.so;optimized;/usr/local/lib/libpcl_segmentation.so;debug;/usr/local/lib/libpcl_segmentation.so;optimized;/usr/local/lib/libpcl_visualization.so;debug;/usr/local/lib/libpcl_visualization.so;optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so;optimized;/usr/local/lib/libpcl_surface.so;debug;/usr/local/lib/libpcl_surface.so;optimized;/usr/local/lib/libpcl_registration.so;debug;/usr/local/lib/libpcl_registration.so;optimized;/usr/local/lib/libpcl_keypoints.so;debug;/usr/local/lib/libpcl_keypoints.so;optimized;/usr/local/lib/libpcl_tracking.so;debug;/usr/local/lib/libpcl_tracking.so;optimized;/usr/local/lib/libpcl_recognition.so;debug;/usr/local/lib/libpcl_recognition.so;optimized;/usr/local/lib/libpcl_stereo.so;debug;/usr/local/lib/libpcl_stereo.so;optimized;/usr/local/lib/libpcl_outofcore.so;debug;/usr/local/lib/libpcl_outofcore.so;optimized;/usr/local/lib/libpcl_people.so;debug;/usr/local/lib/libpcl_people.so;/usr/lib/x86_64-linux-gnu/libboost_system.so;/usr/lib/x86_64-linux-gnu/libboost_filesystem.so;/usr/lib/x86_64-linux-gnu/libboost_thread.so;/usr/lib/x86_64-linux-gnu/libboost_date_time.so;/usr/lib/x86_64-linux-gnu/libboost_iostreams.so;/usr/lib/x86_64-linux-gnu/libboost_serialization.so;/usr/lib/x86_64-linux-gnu/libboost_chrono.so;/usr/lib/x86_64-linux-gnu/libboost_atomic.so;/usr/lib/x86_64-linux-gnu/libboost_regex.so;optimized;/usr/lib/x86_64-linux-gnu/libqhull.so;debug;/usr/lib/x86_64-linux-gnu/libqhull.so;optimized;/usr/lib/x86_64-linux-gnu/libflann_cpp_s.a;debug;/usr/lib/x86_64-linux-gnu/libflann_cpp_s.a;vtkChartsCore;vtkCommonColor;vtkCommonCore;vtksys;vtkCommonDataModel;vtkCommonMath;vtkCommonMisc;vtkCommonSystem;vtkCommonTransforms;vtkCommonExecutionModel;vtkFiltersGeneral;vtkCommonComputationalGeometry;vtkFiltersCore;vtkInfovisCore;vtkFiltersExtraction;vtkFiltersStatistics;vtkImagingFourier;vtkImagingCore;vtkalglib;vtkRenderingContext2D;vtkRenderingCore;vtkFiltersGeometry;vtkFiltersSources;vtkRenderingFreeType;vtkfreetype;vtkzlib;vtkDICOMParser;vtkDomainsChemistry;vtkIOLegacy;vtkIOCore;vtklz4;vtkIOXMLParser;vtkexpat;vtkDomainsChemistryOpenGL2;vtkRenderingOpenGL2;vtkglew;vtkFiltersAMR;vtkIOXML;vtkParallelCore;vtkFiltersFlowPaths;vtkFiltersGeneric;vtkFiltersHybrid;vtkImagingSources;vtkFiltersHyperTree;vtkFiltersImaging;vtkImagingGeneral;vtkFiltersModeling;vtkFiltersParallel;vtkFiltersParallelImaging;vtkFiltersPoints;vtkFiltersProgrammable;vtkFiltersSMP;vtkFiltersSelection;vtkFiltersTexture;vtkFiltersTopology;vtkFiltersVerdict;verdict;vtkGeovisCore;vtkIOImage;vtkmetaio;vtkjpeg;vtkpng;vtktiff;vtkInfovisLayout;vtkImagingHybrid;vtkInteractionStyle;vtkInteractionWidgets;vtkImagingColor;vtkRenderingAnnotation;vtkRenderingVolume;vtkViewsCore;vtkproj4;vtkIOAMR;vtkhdf5_hl;vtkhdf5;vtkIOEnSight;vtkIOExodus;vtkexoIIc;vtkNetCDF;vtkIOExport;vtkRenderingGL2PSOpenGL2;vtkgl2ps;vtklibharu;vtkIOExportOpenGL2;vtkIOGeometry;vtkIOImport;vtkIOInfovis;vtklibxml2;vtkIOLSDyna;vtkIOMINC;vtkIOMovie;vtkoggtheora;vtkIONetCDF;vtknetcdfcpp;vtkIOPLY;vtkIOParallel;vtkjsoncpp;vtkIOParallelXML;vtkIOSQL;vtksqlite;vtkIOTecplotTable;vtkIOVideo;vtkImagingMath;vtkImagingMorphological;vtkImagingStatistics;vtkImagingStencil;vtkInteractionImage;vtkRenderingContextOpenGL2;vtkRenderingImage;vtkRenderingLOD;vtkRenderingLabel;vtkRenderingVolumeOpenGL2;vtkViewsContext2D;vtkViewsInfovis (Required is at least version "1.8") 
+CMake Error at CMakeLists.txt:8 (find_package):
+  By not providing "FindOpenCV.cmake" in CMAKE_MODULE_PATH this project has
+  asked CMake to find a package configuration file provided by "OpenCV", but
+  CMake did not find one.
+
+  Could not find a package configuration file provided by "OpenCV" with any
+  of the following names:
+
+    OpenCVConfig.cmake
+    opencv-config.cmake
+
+  Add the installation prefix of "OpenCV" to CMAKE_PREFIX_PATH or set
+  "OpenCV_DIR" to a directory containing one of the above files.  If "OpenCV"
+  provides a separate development package or SDK, be sure it has been
+  installed.
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeError.log".
