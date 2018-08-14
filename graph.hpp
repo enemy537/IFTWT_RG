@@ -15,7 +15,6 @@
 typedef pcl::PointXYZI PointI;
 typedef pcl::PointCloud<PointI> CloudI;
 typedef boost::adjacency_list<boost::setS, boost::setS, boost::undirectedS, PointI, float> graph_t;
-<<<<<<< HEAD
 enum class MORPH : char {bin_erode = 1,bin_dilate = 2,dilate = 3,erode = 4};
 
 CloudI::Ptr g_to_pc(graph_t& g_)
@@ -26,16 +25,6 @@ CloudI::Ptr g_to_pc(graph_t& g_)
         return p;
     };
 
-=======
-
-auto deep_copy = [](const PointI& p1){
-    PointI p (p1.intensity);
-    p.x = p1.x; p.y = p1.y; p.z = p1.z;
-    return p;
-};
-auto static g_to_pc(graph_t& g_)
-{
->>>>>>> a6f3865fa8202bf06b913435c1ce60d062cebfe9
     CloudI::Ptr out (new CloudI());
     using vd = typename graph_t::vertex_descriptor;
     const auto vd_v = vertices(g_);
@@ -47,11 +36,7 @@ auto static g_to_pc(graph_t& g_)
 };
 class Graph {
 public:
-<<<<<<< HEAD
     Graph(pcl::PointCloud<PointI>::Ptr cloud) : voxel_size(0),overlap(9.e+2),
-=======
-    Graph(pcl::PointCloud<PointI>::Ptr cloud) : voxel_size(0),
->>>>>>> a6f3865fa8202bf06b913435c1ce60d062cebfe9
                                                 tree_(new pcl::search::KdTree<PointI>),
                                                 octree_(nullptr)
     {
@@ -59,7 +44,6 @@ public:
         tree_->setInputCloud(cloud_);
         initialize();
     };
-<<<<<<< HEAD
     Graph(pcl::PointCloud<PointI>::Ptr cloud, double ovrlp) : voxel_size(0),
                                                 tree_(new pcl::search::KdTree<PointI>),
                                                 octree_(nullptr)
@@ -70,13 +54,10 @@ public:
         initialize();
     };
     ~Graph(){ }
-=======
->>>>>>> a6f3865fa8202bf06b913435c1ce60d062cebfe9
     void setInputCloud(pcl::PointCloud<PointI >::Ptr cloud)
     {
         cloud_ = cloud;
         tree_->setInputCloud (cloud_);
-<<<<<<< HEAD
         initialize();
     };
     void setOverlap(double overlap)
@@ -84,9 +65,6 @@ public:
         this->overlap = overlap;
         initialize();
     }
-=======
-    };
->>>>>>> a6f3865fa8202bf06b913435c1ce60d062cebfe9
     graph_t getAdjacencyList()
     {
         return g_;
@@ -154,7 +132,6 @@ public:
                 pcl::visualization::PCL_VISUALIZER_POINT_SIZE,3,"color_cloud");
         return viewer;
     };
-<<<<<<< HEAD
     CloudI::Ptr morph_bin_erode(CloudI::Ptr out)
     {
         return morph_base(MORPH::bin_erode,out);
@@ -185,64 +162,6 @@ public:
 //        return cloud_g;
 //    }
 
-=======
-    CloudI::Ptr morph_bin_erode()
-    {
-        graph_t g_in = g_, g_out = copy_g();
-
-        const auto vd_g = vertices(g_in);
-        const auto vd_o = vertices(g_out);
-#pragma omp parallel
-        {
-#pragma omp single
-            {
-                auto v = vd_g.first, v_o = vd_o.first;
-                for (; v != vd_g.second; ++v, ++v_o) {
-#pragma omp task
-                    {
-                        const auto adj_v = boost::adjacent_vertices(*v, g_in);
-                        using vd = typename graph_t::vertex_descriptor;
-                        bool erodible = std::find_if(adj_v.first, adj_v.second,
-                                        [&g_in](const vd &d) { return g_in[d].intensity == 0; }
-                        ) != adj_v.second;
-                        int intensity = erodible ? 0 : 255;
-                        g_out[*v].intensity = intensity;
-                    }
-                }
-            }
-        }
-
-        return g_to_pc(g_out);
-    }
-    CloudI::Ptr morph_bin_dilate()
-    {
-        graph_t g_in = g_, g_out = copy_g();
-
-        const auto vd_g = vertices(g_in);
-        const auto vd_o = vertices(g_out);
-#pragma omp parallel
-        {
-#pragma omp single
-            {
-                auto v = vd_g.first, v_o = vd_o.first;
-                for (; v != vd_g.second; ++v, ++v_o) {
-#pragma omp task
-                    {
-                        const auto adj_v = boost::adjacent_vertices(*v, g_in);
-                        using vd = typename graph_t::vertex_descriptor;
-                        bool erodible = std::find_if(adj_v.first, adj_v.second,
-                                        [&g_in](const vd &d) { return g_in[d].intensity == 255; }
-                        ) != adj_v.second;
-                        int intensity = erodible ? 255 : 0;
-                        g_out[*v].intensity = intensity;
-                    }
-                }
-            }
-        }
-
-        return g_to_pc(g_out);
-    }
->>>>>>> a6f3865fa8202bf06b913435c1ce60d062cebfe9
 protected:
     double
     computeCloudResolution ()
@@ -271,7 +190,6 @@ protected:
         if (n_points != 0)
         {
             res /= n_points;
-<<<<<<< HEAD
             // Overlap adjust
             res *= overlap;
         }
@@ -291,44 +209,18 @@ protected:
         {
             auto nn_i = find_p(tree_,g_[*v]);
             g_[*v].intensity = cloud_->points[nn_i].intensity;
-=======
-        }
-        return res;
-    }
-    void optimizeGraph()
-    {
-        std::vector<int> nn_i (1);
-        std::vector<float> nn_d (1);
-
-        auto find_p = [tree = tree_,&nn_i,&nn_d](const PointI& p)
-        {return tree->nearestKSearch(p,1, nn_i, nn_d);};
-
-        const auto vd_v = vertices(g_);
-        for(auto v = vd_v.first; v != vd_v.second; ++v)
-        {
-            const auto p = find_p(g_[*v]);
-            g_[*v].intensity = cloud_->points[nn_i[0]].intensity;
->>>>>>> a6f3865fa8202bf06b913435c1ce60d062cebfe9
         }
     }
 private:
     pcl::PointCloud<PointI>::Ptr cloud_;
     pcl::search::KdTree<PointI>::Ptr tree_;
-<<<<<<< HEAD
     double voxel_size, overlap;
-=======
-    double voxel_size;
->>>>>>> a6f3865fa8202bf06b913435c1ce60d062cebfe9
     graph_t g_;
     pcl::octree::OctreePointCloudAdjacency<PointI>::Ptr octree_;
 
     void initialize()
     {
         voxel_size = computeCloudResolution();
-<<<<<<< HEAD
-=======
-
->>>>>>> a6f3865fa8202bf06b913435c1ce60d062cebfe9
         // Compute the octree adjacency tree
         octree_.reset(new pcl::octree::OctreePointCloudAdjacency<PointI>(voxel_size));
         octree_->setInputCloud(cloud_);
@@ -340,7 +232,6 @@ private:
         // Adjacency Graph
         octree_->computeVoxelAdjacencyGraph(g_);
         optimizeGraph();
-<<<<<<< HEAD
         cloud_.reset();
     };
     graph_t copy_g()
@@ -402,19 +293,5 @@ private:
             }
         }
         return out;
-=======
-    };
-
-    graph_t copy_g()
-    {
-        std::map<graph_t::vertex_descriptor, int> index;
-        for (auto v : boost::make_iterator_range(boost::vertices(g_))) {
-            index.insert(std::make_pair(v, index.size()));
-        }
-        graph_t g_out;
-        boost::copy_graph(g_,g_out,
-        boost::vertex_index_map(boost::make_assoc_property_map(index)));
-        return g_out;
->>>>>>> a6f3865fa8202bf06b913435c1ce60d062cebfe9
     }
 };
