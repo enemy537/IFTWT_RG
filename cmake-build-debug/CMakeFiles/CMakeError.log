@@ -1,6 +1,7 @@
 Determining if the pthread_create exist failed with the following output:
 Change Dir: /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp
 
+<<<<<<< HEAD
 Run Build Command:"/usr/bin/make" "cmTC_0ad72/fast"
 /usr/bin/make -f CMakeFiles/cmTC_0ad72.dir/build.make CMakeFiles/cmTC_0ad72.dir/build
 make[1]: Entering directory '/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp'
@@ -17,6 +18,24 @@ make[1]: *** [cmTC_0ad72] Error 1
 make[1]: Leaving directory '/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp'
 Makefile:121: recipe for target 'cmTC_0ad72/fast' failed
 make: *** [cmTC_0ad72/fast] Error 2
+=======
+Run Build Command:"/usr/bin/make" "cmTC_31f91/fast"
+/usr/bin/make -f CMakeFiles/cmTC_31f91.dir/build.make CMakeFiles/cmTC_31f91.dir/build
+make[1]: Entering directory '/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_31f91.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_31f91.dir/CheckSymbolExists.c.o   -c /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_31f91
+/opt/clion-2018.2/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_31f91.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_31f91.dir/CheckSymbolExists.c.o  -o cmTC_31f91 
+CMakeFiles/cmTC_31f91.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_31f91.dir/build.make:86: recipe for target 'cmTC_31f91' failed
+make[1]: *** [cmTC_31f91] Error 1
+make[1]: Leaving directory '/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp'
+Makefile:121: recipe for target 'cmTC_31f91/fast' failed
+make: *** [cmTC_31f91/fast] Error 2
+>>>>>>> a6f3865fa8202bf06b913435c1ce60d062cebfe9
 
 File /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
@@ -36,6 +55,7 @@ int main(int argc, char** argv)
 Determining if the function pthread_create exists in the pthreads failed with the following output:
 Change Dir: /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp
 
+<<<<<<< HEAD
 Run Build Command:"/usr/bin/make" "cmTC_e4a0f/fast"
 /usr/bin/make -f CMakeFiles/cmTC_e4a0f.dir/build.make CMakeFiles/cmTC_e4a0f.dir/build
 make[1]: Entering directory '/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp'
@@ -51,5 +71,22 @@ make[1]: *** [cmTC_e4a0f] Error 1
 make[1]: Leaving directory '/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp'
 Makefile:121: recipe for target 'cmTC_e4a0f/fast' failed
 make: *** [cmTC_e4a0f/fast] Error 2
+=======
+Run Build Command:"/usr/bin/make" "cmTC_3c16c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_3c16c.dir/build.make CMakeFiles/cmTC_3c16c.dir/build
+make[1]: Entering directory '/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3c16c.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_3c16c.dir/CheckFunctionExists.c.o   -c /opt/clion-2018.2/bin/cmake/linux/share/cmake-3.12/Modules/CheckFunctionExists.c
+Linking C executable cmTC_3c16c
+/opt/clion-2018.2/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3c16c.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_3c16c.dir/CheckFunctionExists.c.o  -o cmTC_3c16c -lpthreads 
+/usr/bin/x86_64-linux-gnu-ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_3c16c.dir/build.make:86: recipe for target 'cmTC_3c16c' failed
+make[1]: *** [cmTC_3c16c] Error 1
+make[1]: Leaving directory '/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/CMakeTmp'
+Makefile:121: recipe for target 'cmTC_3c16c/fast' failed
+make: *** [cmTC_3c16c/fast] Error 2
+>>>>>>> a6f3865fa8202bf06b913435c1ce60d062cebfe9
 
 
