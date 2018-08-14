@@ -55,7 +55,7 @@ pcl::PointCloud<pcl::PointXYZI>::Ptr cloudRGB2GRAY(pcl::PointCloud<PointT>::Ptr 
 
     return cloud_gray;
 }
-pcl::PointCloud<pcl::PointXYZI>::Ptr cloudGray(pcl::PointCloud<PointT>::Ptr cloud)
+pcl::PointCloud<pcl::PointXYZI>::Ptr cloudGray(CloudT::Ptr cloud)
 {
     pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_gray (new pcl::PointCloud<pcl::PointXYZI>);
     cloud_gray->height = cloud->height;
@@ -80,14 +80,14 @@ pcl::PointCloud<pcl::PointXYZI>::Ptr cloudGray(pcl::PointCloud<PointT>::Ptr clou
 
 int main (int argc, char** argv) {
     CloudT::Ptr cloud_raw (new CloudT());
-    if ( pcl::io::loadPCDFile <PointT> ("/home/pedro/Desktop/point_cloud/boamorte_final.pcd", *cloud_raw) == -1) {
+    if ( pcl::io::loadPCDFile <PointT> ("/home/pedro/Desktop/point_cloud/bmrt_small.pcd", *cloud_raw) == -1) {
         std::cout << "Cloud reading failed." << std::endl;
         return (-1);
     }
 
     pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_i = cloudGray(cloud_raw);
 
-    Graph gg (cloud_i,10);
+    Graph gg (cloud_i,2);
 
     pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_e (new pcl::PointCloud<pcl::PointXYZI>);
     pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_d (new pcl::PointCloud<pcl::PointXYZI>);
@@ -103,7 +103,7 @@ int main (int argc, char** argv) {
         cloud_g->points[i].intensity = intensity;
     }
 
-//    pcl::io::savePCDFile("lucy_gradient.pcd",*cloud_g);
+    pcl::io::savePCDFile("bmrt_gradiente.pcd",*cloud_g);
 //    pcl::io::savePCDFile("lucy_erode.pcd",*cloud_e);
 //    pcl::io::savePCDFile("lucy_dilate.pcd",*cloud_d);
 
@@ -176,7 +176,5 @@ int main (int argc, char** argv) {
         viewer->spinOnce(100);
         boost::this_thread::sleep (boost::posix_time::microseconds (100000));
     }
-
-
     return (0);
 }
