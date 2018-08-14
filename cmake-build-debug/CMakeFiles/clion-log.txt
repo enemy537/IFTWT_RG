@@ -1,6 +1,4 @@
-/home/avell/Downloads/clion-2017.3.4/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/avell/CLionProjects/IFTWT_RG
--- Checking for module 'eigen3'
---   Found eigen3, version 3.2.92
+/opt/clion-2018.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/pedro/CLionProjects/IFTWT_RG
 -- Boost version: 1.58.0
 -- Found the following Boost libraries:
 --   system
@@ -12,14 +10,14 @@
 --   chrono
 --   atomic
 --   regex
--- Checking for module 'flann'
---   Found flann, version 1.8.4
--- Checking for module 'flann'
---   Found flann, version 1.8.4
 -- Checking for module 'libopenni'
---   Found libopenni, version 1.5.4.0
+--   No package 'libopenni' found
+-- Could NOT find openni (missing: OPENNI_LIBRARY OPENNI_INCLUDE_DIRS) 
+** WARNING ** io features related to openni will be disabled
 -- Checking for module 'libopenni2'
---   Found libopenni2, version 2.2.0.3
+--   No package 'libopenni2' found
+-- Could NOT find OpenNI2 (missing: OPENNI2_LIBRARY OPENNI2_INCLUDE_DIRS) 
+** WARNING ** io features related to openni2 will be disabled
 -- Could NOT find ensenso (missing: ENSENSO_LIBRARY ENSENSO_INCLUDE_DIR) 
 ** WARNING ** io features related to ensenso will be disabled
 -- Could NOT find DAVIDSDK (missing: DAVIDSDK_LIBRARY DAVIDSDK_INCLUDE_DIR) 
@@ -28,20 +26,15 @@
 ** WARNING ** io features related to dssdk will be disabled
 ** WARNING ** io features related to pcap will be disabled
 ** WARNING ** io features related to png will be disabled
--- The imported target "vtkRenderingPythonTkWidgets" references the file
-   "/usr/lib/x86_64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
-but this file does not exist.  Possible reasons include:
-* The file was deleted, renamed, or moved to another location.
-* An install or uninstall procedure did not complete successfully.
-* The installation package was faulty and contained
-   "/usr/lib/cmake/vtk-6.2/VTKTargets.cmake"
-but not all the files it references.
-
 ** WARNING ** io features related to libusb-1.0 will be disabled
 -- Checking for module 'libopenni'
---   Found libopenni, version 1.5.4.0
+--   No package 'libopenni' found
+-- Could NOT find openni (missing: OPENNI_LIBRARY OPENNI_INCLUDE_DIRS) 
+** WARNING ** visualization features related to openni will be disabled
 -- Checking for module 'libopenni2'
---   Found libopenni2, version 2.2.0.3
+--   No package 'libopenni2' found
+-- Could NOT find OpenNI2 (missing: OPENNI2_LIBRARY OPENNI2_INCLUDE_DIRS) 
+** WARNING ** visualization features related to openni2 will be disabled
 -- Could NOT find ensenso (missing: ENSENSO_LIBRARY ENSENSO_INCLUDE_DIR) 
 ** WARNING ** visualization features related to ensenso will be disabled
 -- Could NOT find DAVIDSDK (missing: DAVIDSDK_LIBRARY DAVIDSDK_INCLUDE_DIR) 
@@ -50,30 +43,27 @@ but not all the files it references.
 ** WARNING ** visualization features related to dssdk will be disabled
 -- Could NOT find RSSDK (missing: _RSSDK_LIBRARIES) 
 ** WARNING ** visualization features related to rssdk will be disabled
--- Checking for module 'libopenni'
---   Found libopenni, version 1.5.4.0
 -- looking for PCL_COMMON
 -- looking for PCL_OCTREE
+-- looking for PCL_IO
 -- looking for PCL_KDTREE
 -- looking for PCL_SEARCH
 -- looking for PCL_SAMPLE_CONSENSUS
 -- looking for PCL_FILTERS
--- looking for PCL_IO
+-- looking for PCL_GEOMETRY
 -- looking for PCL_2D
 -- looking for PCL_FEATURES
--- looking for PCL_REGISTRATION
--- looking for PCL_KEYPOINTS
--- looking for PCL_GEOMETRY
 -- looking for PCL_ML
 -- looking for PCL_SEGMENTATION
--- looking for PCL_VISUALIZATION
--- looking for PCL_OUTOFCORE
--- looking for PCL_STEREO
 -- looking for PCL_SURFACE
+-- looking for PCL_REGISTRATION
 -- looking for PCL_RECOGNITION
--- looking for PCL_PEOPLE
+-- looking for PCL_KEYPOINTS
+-- looking for PCL_VISUALIZATION
 -- looking for PCL_TRACKING
--- looking for PCL_APPS
+-- looking for PCL_STEREO
+-- looking for PCL_PEOPLE
+-- looking for PCL_OUTOFCORE
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/avell/CLionProjects/IFTWT_RG/cmake-build-debug
+-- Build files have been written to: /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug
