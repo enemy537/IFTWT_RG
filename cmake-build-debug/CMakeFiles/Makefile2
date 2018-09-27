@@ -50,19 +50,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/clion-2018.2/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /opt/clion-2018.2/bin/cmake/linux/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pedro/CLionProjects/IFTWT_RG
+CMAKE_SOURCE_DIR = /Users/Lab/CLionProjects/IFTWT_RG
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/Lab/CLionProjects/IFTWT_RG/cmake-build-debug
 
 #=============================================================================
 # Target rules for target CMakeFiles/IFTWT_RG.dir
@@ -71,7 +71,7 @@ CMAKE_BINARY_DIR = /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug
 CMakeFiles/IFTWT_RG.dir/all:
 	$(MAKE) -f CMakeFiles/IFTWT_RG.dir/build.make CMakeFiles/IFTWT_RG.dir/depend
 	$(MAKE) -f CMakeFiles/IFTWT_RG.dir/build.make CMakeFiles/IFTWT_RG.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target IFTWT_RG"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/Lab/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target IFTWT_RG"
 .PHONY : CMakeFiles/IFTWT_RG.dir/all
 
 # Include target in all.
@@ -81,9 +81,9 @@ all: CMakeFiles/IFTWT_RG.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/IFTWT_RG.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Lab/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/IFTWT_RG.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Lab/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/IFTWT_RG.dir/rule
 
 # Convenience name for target.

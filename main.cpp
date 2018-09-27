@@ -10,6 +10,7 @@
 #include <pcl/kdtree/kdtree_flann.h>
 #include <opencv2/imgproc/types_c.h>
 #include "graph.hpp"
+//#include "ift.hpp"
 
 typedef pcl::PointXYZRGB PointT;
 typedef pcl::PointXYZI PointI;
@@ -77,18 +78,7 @@ pcl::PointCloud<pcl::PointXYZI>::Ptr cloudGray(CloudT::Ptr cloud)
     }
     return cloud_gray;
 }
-
-int main (int argc, char** argv) {
-    CloudT::Ptr cloud_raw (new CloudT());
-    if ( pcl::io::loadPCDFile <PointT> ("/home/pedro/Desktop/point_cloud/bmrt_small.pcd", *cloud_raw) == -1) {
-        std::cout << "Cloud reading failed." << std::endl;
-        return (-1);
-    }
-
-    pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_i = cloudGray(cloud_raw);
-
-    Graph gg (cloud_i,2);
-
+CloudI::Ptr gradient(Graph& gg){
     pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_e (new pcl::PointCloud<pcl::PointXYZI>);
     pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_d (new pcl::PointCloud<pcl::PointXYZI>);
     gg.morph_erode(cloud_e);
@@ -102,10 +92,21 @@ int main (int argc, char** argv) {
                           - cloud_e->points[i].intensity;
         cloud_g->points[i].intensity = intensity;
     }
+    return cloud_g;
+}
+int main (int argc, char** argv) {
+    CloudT::Ptr cloud_raw (new CloudT());
+    if ( pcl::io::loadPCDFile <PointT> ("/Users/Lab/Documents/point_cloud/lucy.pcd", *cloud_raw) == -1) {
+        std::cout << "Cloud reading failed." << std::endl;
+        return (-1);
+    }
 
-    pcl::io::savePCDFile("bmrt_gradiente.pcd",*cloud_g);
-//    pcl::io::savePCDFile("lucy_erode.pcd",*cloud_e);
-//    pcl::io::savePCDFile("lucy_dilate.pcd",*cloud_d);
+    pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_i = cloudGray(cloud_raw);
+
+    Graph gg (cloud_i,2);
+
+//    IFT_PCD ift(&gg);
+//    CloudI::Ptr cloud_g = ift.gv_to_pc();
 
     // Project IFTWT_RG
     /**pcl::search::Search<pcl::PointXYZ>::Ptr tree = boost::shared_ptr<pcl::search::Search<pcl::PointXYZ> > (new pcl::search::KdTree<pcl::PointXYZ>);
@@ -164,6 +165,7 @@ int main (int argc, char** argv) {
     **/
 
     // Normal visualization stuff
+    CloudI::Ptr cloud_g = gradient(gg);
     boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer (new pcl::visualization::PCLVisualizer ("3d cloud"));
     pcl::visualization::PointCloudColorHandlerGenericField<pcl::PointXYZI> intensity (cloud_g,"intensity");
     viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "cloud");
