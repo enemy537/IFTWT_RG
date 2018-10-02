@@ -5,7 +5,6 @@
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/copy.hpp>
 #include <boost/graph/graph_utility.hpp>
-//#include "graph.hpp"
 #include <queue>
 #include <iostream>
 #include <map>
@@ -15,16 +14,9 @@
 #define MIN_COST 0
 
 
-class VertexBundle{
-public:
-    VertexBundle( unsigned int cost = MAX_COST): cost(cost) { }
-
-    friend bool operator > (const VertexBundle& v1, const VertexBundle& v2)
-    {
-        return v1.cost > v2.cost;
-    }
+struct VertexBundle{
     unsigned int cost;
-    PointI* point;
+    PointI point;
 };
 class EdgeBundle {
 public:
@@ -58,46 +50,43 @@ public:
     }
 };
 
-struct vertex_interface{
-    void operator()(PointI& v1, VertexBundle& v2){
-        v2.point = &v1;
-    }
-};
-struct edge_interface{
-    template <typename Edge1, typename Edge2>
-    void operator()(const Edge1& v1, const Edge2& v2){ }
-};
+typedef boost::adjacency_list<boost::setS, boost::setS, boost::undirectedS,
+        VertexBundle,EdgeBundle> graph_v;
+typedef boost::graph_traits<graph_v>::vertex_descriptor pcd_vx_descriptor;
+typedef boost::graph_traits<graph_v>::vertex_iterator pcd_vx_iterator;
+
 
 class IFT_PCD{
-    typedef boost::adjacency_list<boost::setS, boost::setS, boost::undirectedS,
-            VertexBundle,EdgeBundle> graph_v;
-    typedef boost::graph_traits<graph_v>::vertex_descriptor vertex_descriptor;
-    typedef boost::graph_traits<graph_v>::vertex_iterator vertex_iterator;
-
 public:
     IFT_PCD(Graph* gg){
-        boost::copy_graph(gg,g,boost::vertex_copy(vertex_iterface())
-        .edge_copy(edge_interface()));
+        g_t = gg->getAdjacencyList();
+        copy_graph();
     }
 
     CloudI::Ptr gv_to_pc()
     {
-        auto deep_copy = [](const PointI& p1){
-            PointI p (p1.intensity);
-            p.x = p1.x; p.y = p1.y; p.z = p1.z;
-            return p;
-        };
-
         CloudI::Ptr out (new CloudI());
-        const auto vd_v = vertices(g);
+        const auto vd_v = vertices(g_v);
         for (auto v = vd_v.first; v != vd_v.second; ++v) {
-
-            out->push_back(deep_copy(g[*v]));
+            out->push_back(g_v[*v].point);
         }
         return out;
     };
 private:
 
-    graph_v g;
+    void copy_graph(){
+        std::map<graph_t::vertex_descriptor, pcd_vx_descriptor> map;
+        BGL_FORALL_VERTICES(v,g_t,graph_t)
+        {
+            pcd_vx_descriptor pcd_vx = boost::add_vertex({MAX_COST,g_t[v]},g_v);
+            map[v] = pcd_vx;
+        }
+        BGL_FORALL_EDGES(e,g_t,graph_t)
+        {
+            boost::add_edge(map[boost::source(e,g_t)],map[boost::target(e,g_t)]);
+        }
+    }
 
+    graph_v g_v;
+    graph_t g_t;
 };
