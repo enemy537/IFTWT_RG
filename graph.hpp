@@ -45,8 +45,8 @@ public:
         initialize();
     };
     Graph(pcl::PointCloud<PointI>::Ptr cloud, double ovrlp) : voxel_size(0),
-                                                tree_(new pcl::search::KdTree<PointI>),
-                                                octree_(nullptr)
+                                                              tree_(new pcl::search::KdTree<PointI>),
+                                                              octree_(nullptr)
     {
         overlap = ovrlp;
         cloud_ = cloud;
@@ -148,19 +148,36 @@ public:
     {
         return morph_base(MORPH::dilate,out);
     }
-//    CloudI::Ptr morph_gradient()
-//    {
-//        CloudI::Ptr cloud_e = this->morph_erode();
-//        CloudI::Ptr cloud_d = this->morph_dilate();
-//        CloudI::Ptr cloud_g (new CloudI);
-//
-//        for(int i = 0; i < cloud_g->size(); i++){
-//            float intensity = cloud_d->points[i].intensity
-//                            - cloud_e->points[i].intensity;
-//            cloud_g->points[i].intensity = intensity;
-//        }
-//        return cloud_g;
-//    }
+    CloudI::Ptr morph_gradient()
+    {
+        CloudI::Ptr cloud_e (new CloudI);
+        CloudI::Ptr cloud_d (new CloudI);
+        this->morph_erode(cloud_e);
+        this->morph_dilate(cloud_d);
+
+        CloudI::Ptr cloud_g (new CloudI);
+        pcl::copyPointCloud(*cloud_d,*cloud_g);
+
+        for(int i = 0; i < cloud_g->size(); i++){
+            float intensity = cloud_d->points[i].intensity
+                            - cloud_e->points[i].intensity;
+            cloud_g->points[i].intensity = intensity;
+        }
+        return cloud_g;
+    }
+    graph_t pc_to_g(CloudI::Ptr cloud)
+    {
+        pcl::search::KdTree<PointI>::Ptr tree (new pcl::search::KdTree<PointI>);
+        graph_t out = copy_g();
+        tree->setInputCloud(cloud);
+
+        BGL_FORALL_VERTICES(v,out,graph_t)
+        {
+            int id_out = find_p(tree,g_[v]);
+            out[v].intensity = cloud->points[id_out].intensity;
+        }
+        return out;
+    }
 
 protected:
     double
@@ -242,7 +259,7 @@ private:
         }
         graph_t g_out;
         boost::copy_graph(g_,g_out,
-        boost::vertex_index_map(boost::make_assoc_property_map(index)));
+                          boost::vertex_index_map(boost::make_assoc_property_map(index)));
         return g_out;
     }
     CloudI::Ptr morph_base(MORPH type, CloudI::Ptr& out){

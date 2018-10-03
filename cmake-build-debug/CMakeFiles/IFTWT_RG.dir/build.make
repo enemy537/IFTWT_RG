@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
+CMAKE_COMMAND = /opt/clion-2018.2.3/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
+RM = /opt/clion-2018.2.3/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/Lab/CLionProjects/IFTWT_RG
+CMAKE_SOURCE_DIR = /home/pedro/CLionProjects/IFTWT_RG
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/Lab/CLionProjects/IFTWT_RG/cmake-build-debug
+CMAKE_BINARY_DIR = /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/IFTWT_RG.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/IFTWT_RG.dir/flags.make
 
 CMakeFiles/IFTWT_RG.dir/main.cpp.o: CMakeFiles/IFTWT_RG.dir/flags.make
 CMakeFiles/IFTWT_RG.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Lab/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/IFTWT_RG.dir/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/IFTWT_RG.dir/main.cpp.o -c /Users/Lab/CLionProjects/IFTWT_RG/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/IFTWT_RG.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/IFTWT_RG.dir/main.cpp.o -c /home/pedro/CLionProjects/IFTWT_RG/main.cpp
 
 CMakeFiles/IFTWT_RG.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/IFTWT_RG.dir/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Lab/CLionProjects/IFTWT_RG/main.cpp > CMakeFiles/IFTWT_RG.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/pedro/CLionProjects/IFTWT_RG/main.cpp > CMakeFiles/IFTWT_RG.dir/main.cpp.i
 
 CMakeFiles/IFTWT_RG.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/IFTWT_RG.dir/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Lab/CLionProjects/IFTWT_RG/main.cpp -o CMakeFiles/IFTWT_RG.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/pedro/CLionProjects/IFTWT_RG/main.cpp -o CMakeFiles/IFTWT_RG.dir/main.cpp.s
 
 # Object files for target IFTWT_RG
 IFTWT_RG_OBJECTS = \
@@ -79,270 +79,229 @@ IFTWT_RG_EXTERNAL_OBJECTS =
 
 IFTWT_RG: CMakeFiles/IFTWT_RG.dir/main.cpp.o
 IFTWT_RG: CMakeFiles/IFTWT_RG.dir/build.make
-IFTWT_RG: /usr/local/lib/libboost_system-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_filesystem-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_thread-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_date_time-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_iostreams-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_serialization-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_chrono-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_atomic-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_regex-mt.dylib
-IFTWT_RG: /usr/local/lib/libpcl_common.dylib
-IFTWT_RG: /usr/local/lib/libpcl_octree.dylib
-IFTWT_RG: /usr/lib/libz.dylib
-IFTWT_RG: /usr/lib/libexpat.dylib
-IFTWT_RG: /usr/local/opt/python@2/Frameworks/Python.framework/Versions/2.7/Python
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkWrappingTools-8.1.a
-IFTWT_RG: /usr/local/lib/libjpeg.dylib
-IFTWT_RG: /usr/local/lib/libpng.dylib
-IFTWT_RG: /usr/local/lib/libtiff.dylib
-IFTWT_RG: /usr/local/lib/libhdf5.dylib
-IFTWT_RG: /usr/local/lib/libsz.dylib
-IFTWT_RG: /usr/lib/libdl.dylib
-IFTWT_RG: /usr/lib/libm.dylib
-IFTWT_RG: /usr/local/lib/libhdf5_hl.dylib
-IFTWT_RG: /usr/local/lib/libnetcdf.dylib
-IFTWT_RG: /usr/lib/libxml2.dylib
-IFTWT_RG: /usr/local/lib/libpcl_io.dylib
-IFTWT_RG: /usr/local/lib/libflann_cpp_s.a
-IFTWT_RG: /usr/local/lib/libpcl_kdtree.dylib
-IFTWT_RG: /usr/local/lib/libpcl_search.dylib
-IFTWT_RG: /usr/local/lib/libpcl_sample_consensus.dylib
-IFTWT_RG: /usr/local/lib/libpcl_filters.dylib
-IFTWT_RG: /usr/local/lib/libpcl_features.dylib
-IFTWT_RG: /usr/local/lib/libpcl_ml.dylib
-IFTWT_RG: /usr/local/lib/libpcl_segmentation.dylib
-IFTWT_RG: /usr/local/lib/libpcl_visualization.dylib
-IFTWT_RG: /usr/local/lib/libqhull_p.dylib
-IFTWT_RG: /usr/local/lib/libpcl_surface.dylib
-IFTWT_RG: /usr/local/lib/libpcl_registration.dylib
-IFTWT_RG: /usr/local/lib/libpcl_keypoints.dylib
-IFTWT_RG: /usr/local/lib/libpcl_tracking.dylib
-IFTWT_RG: /usr/local/lib/libpcl_recognition.dylib
-IFTWT_RG: /usr/local/lib/libpcl_stereo.dylib
-IFTWT_RG: /usr/local/lib/libpcl_apps.dylib
-IFTWT_RG: /usr/local/lib/libpcl_outofcore.dylib
-IFTWT_RG: /usr/local/lib/libpcl_people.dylib
-IFTWT_RG: /usr/local/lib/libGLEW.dylib
-IFTWT_RG: /usr/local/lib/libpcl_simulation.dylib
-IFTWT_RG: /usr/local/lib/libboost_system-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_filesystem-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_thread-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_date_time-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_iostreams-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_serialization-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_chrono-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_atomic-mt.dylib
-IFTWT_RG: /usr/local/lib/libboost_regex-mt.dylib
-IFTWT_RG: /usr/local/lib/libqhull_p.dylib
-IFTWT_RG: /usr/local/lib/libflann_cpp_s.a
-IFTWT_RG: /usr/lib/libz.dylib
-IFTWT_RG: /usr/lib/libexpat.dylib
-IFTWT_RG: /usr/local/opt/python@2/Frameworks/Python.framework/Versions/2.7/Python
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkWrappingTools-8.1.a
-IFTWT_RG: /usr/local/lib/libjpeg.dylib
-IFTWT_RG: /usr/local/lib/libpng.dylib
-IFTWT_RG: /usr/local/lib/libtiff.dylib
-IFTWT_RG: /usr/local/lib/libhdf5.dylib
-IFTWT_RG: /usr/local/lib/libsz.dylib
-IFTWT_RG: /usr/lib/libdl.dylib
-IFTWT_RG: /usr/lib/libm.dylib
-IFTWT_RG: /usr/local/lib/libhdf5_hl.dylib
-IFTWT_RG: /usr/local/lib/libnetcdf.dylib
-IFTWT_RG: /usr/lib/libxml2.dylib
-IFTWT_RG: /usr/lib/libz.dylib
-IFTWT_RG: /usr/lib/libexpat.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkDomainsChemistryOpenGL2-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersFlowPaths-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersGeneric-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersHyperTree-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersParallelImaging-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersPoints-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersProgrammable-8.1.1.dylib
-IFTWT_RG: /usr/local/opt/python@2/Frameworks/Python.framework/Versions/2.7/Python
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkWrappingTools-8.1.a
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersPython-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersSMP-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersSelection-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersTexture-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersTopology-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersVerdict-8.1.1.dylib
-IFTWT_RG: /usr/local/lib/libjpeg.dylib
-IFTWT_RG: /usr/local/lib/libpng.dylib
-IFTWT_RG: /usr/local/lib/libtiff.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkGeovisCore-8.1.1.dylib
-IFTWT_RG: /usr/local/lib/libhdf5.dylib
-IFTWT_RG: /usr/local/lib/libsz.dylib
-IFTWT_RG: /usr/lib/libdl.dylib
-IFTWT_RG: /usr/lib/libm.dylib
-IFTWT_RG: /usr/local/lib/libhdf5_hl.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOAMR-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOEnSight-8.1.1.dylib
-IFTWT_RG: /usr/local/lib/libnetcdf.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOExodus-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOExportOpenGL2-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOImport-8.1.1.dylib
-IFTWT_RG: /usr/lib/libxml2.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOInfovis-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOLSDyna-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOMINC-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOMovie-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOPLY-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOParallel-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOParallelXML-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOSQL-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOTecplotTable-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOVideo-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkImagingMorphological-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkImagingStatistics-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkImagingStencil-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkInfovisBoostGraphAlgorithms-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkInteractionImage-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingContextOpenGL2-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingFreeTypeFontConfig-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingImage-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingLOD-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingVolumeOpenGL2-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkViewsContext2D-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkViewsInfovis-8.1.1.dylib
-IFTWT_RG: /usr/local/lib/libopencv_stitching.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_superres.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_videostab.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_aruco.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_bgsegm.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_bioinspired.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_ccalib.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_dnn_objdetect.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_dpm.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_face.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_fuzzy.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_hfs.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_img_hash.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_line_descriptor.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_optflow.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_reg.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_rgbd.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_saliency.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_stereo.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_structured_light.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_surface_matching.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_tracking.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_xfeatures2d.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_ximgproc.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_xobjdetect.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_xphoto.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libpcl_common.dylib
-IFTWT_RG: /usr/local/lib/libpcl_octree.dylib
-IFTWT_RG: /usr/local/lib/libpcl_io.dylib
-IFTWT_RG: /usr/local/lib/libpcl_kdtree.dylib
-IFTWT_RG: /usr/local/lib/libpcl_search.dylib
-IFTWT_RG: /usr/local/lib/libpcl_sample_consensus.dylib
-IFTWT_RG: /usr/local/lib/libpcl_filters.dylib
-IFTWT_RG: /usr/local/lib/libpcl_features.dylib
-IFTWT_RG: /usr/local/lib/libpcl_ml.dylib
-IFTWT_RG: /usr/local/lib/libpcl_segmentation.dylib
-IFTWT_RG: /usr/local/lib/libpcl_visualization.dylib
-IFTWT_RG: /usr/local/lib/libpcl_surface.dylib
-IFTWT_RG: /usr/local/lib/libpcl_registration.dylib
-IFTWT_RG: /usr/local/lib/libpcl_keypoints.dylib
-IFTWT_RG: /usr/local/lib/libpcl_tracking.dylib
-IFTWT_RG: /usr/local/lib/libpcl_recognition.dylib
-IFTWT_RG: /usr/local/lib/libpcl_stereo.dylib
-IFTWT_RG: /usr/local/lib/libpcl_apps.dylib
-IFTWT_RG: /usr/local/lib/libpcl_outofcore.dylib
-IFTWT_RG: /usr/local/lib/libpcl_people.dylib
-IFTWT_RG: /usr/local/lib/libGLEW.dylib
-IFTWT_RG: /usr/local/lib/libpcl_simulation.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkDomainsChemistry-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkWrappingPython27Core-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkverdict-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkproj4-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersAMR-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOExport-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingGL2PSOpenGL2-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkgl2ps-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtklibharu-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkoggtheora-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersParallel-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkexoIIc-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOGeometry-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIONetCDF-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtknetcdfcpp-8.1.1.dylib
-IFTWT_RG: /usr/local/lib/libnetcdf.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkjsoncpp-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkParallelCore-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOLegacy-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtksqlite-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingOpenGL2-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkglew-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkImagingMath-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkChartsCore-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingContext2D-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersImaging-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkInfovisLayout-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkInfovisCore-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkViewsCore-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkInteractionWidgets-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersHybrid-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkImagingGeneral-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkImagingSources-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersModeling-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkImagingHybrid-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOImage-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkDICOMParser-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkmetaio-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkInteractionStyle-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersExtraction-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersStatistics-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkImagingFourier-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkalglib-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingAnnotation-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkImagingColor-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingVolume-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkImagingCore-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOXML-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOXMLParser-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkIOCore-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtklz4-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingLabel-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingFreeType-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkRenderingCore-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkCommonColor-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersGeometry-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersSources-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersGeneral-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkCommonComputationalGeometry-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkFiltersCore-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkCommonExecutionModel-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkCommonDataModel-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkCommonMisc-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkCommonSystem-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtksys-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkCommonTransforms-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkCommonMath-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkCommonCore-8.1.1.dylib
-IFTWT_RG: /usr/local/Cellar/vtk/8.1.1_1/lib/libvtkfreetype-8.1.1.dylib
-IFTWT_RG: /usr/lib/libz.dylib
-IFTWT_RG: /usr/local/lib/libopencv_shape.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_photo.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_calib3d.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_features2d.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_highgui.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_videoio.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_phase_unwrapping.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_dnn.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_video.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_datasets.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_flann.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_ml.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_plot.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_imgcodecs.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_objdetect.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_imgproc.3.4.2.dylib
-IFTWT_RG: /usr/local/lib/libopencv_core.3.4.2.dylib
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_system.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_thread.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_serialization.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_regex.so
+IFTWT_RG: /usr/local/lib/libpcl_common.so
+IFTWT_RG: /usr/local/lib/libpcl_octree.so
+IFTWT_RG: /usr/local/lib/libpcl_io.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libflann_cpp_s.a
+IFTWT_RG: /usr/local/lib/libpcl_kdtree.so
+IFTWT_RG: /usr/local/lib/libpcl_search.so
+IFTWT_RG: /usr/local/lib/libpcl_sample_consensus.so
+IFTWT_RG: /usr/local/lib/libpcl_filters.so
+IFTWT_RG: /usr/local/lib/libpcl_features.so
+IFTWT_RG: /usr/local/lib/libpcl_ml.so
+IFTWT_RG: /usr/local/lib/libpcl_segmentation.so
+IFTWT_RG: /usr/local/lib/libpcl_visualization.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libqhull.so
+IFTWT_RG: /usr/local/lib/libpcl_surface.so
+IFTWT_RG: /usr/local/lib/libpcl_registration.so
+IFTWT_RG: /usr/local/lib/libpcl_keypoints.so
+IFTWT_RG: /usr/local/lib/libpcl_tracking.so
+IFTWT_RG: /usr/local/lib/libpcl_recognition.so
+IFTWT_RG: /usr/local/lib/libpcl_stereo.so
+IFTWT_RG: /usr/local/lib/libpcl_outofcore.so
+IFTWT_RG: /usr/local/lib/libpcl_people.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_system.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_thread.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_serialization.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libboost_regex.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libqhull.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libflann_cpp_s.a
+IFTWT_RG: /usr/local/lib/libvtkDomainsChemistryOpenGL2-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersFlowPaths-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersGeneric-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersHyperTree-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersParallelImaging-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersPoints-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersProgrammable-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersSMP-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersSelection-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersTopology-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersVerdict-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkverdict-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkGeovisCore-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkproj4-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOAMR-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOEnSight-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOExodus-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOExportOpenGL2-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOImport-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOInfovis-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtklibxml2-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOLSDyna-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOMINC-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOMovie-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkoggtheora-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOParallel-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkjsoncpp-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOParallelXML-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOSQL-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtksqlite-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOTecplotTable-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOVideo-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkImagingMorphological-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkImagingStatistics-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkImagingStencil-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkInteractionImage-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkRenderingContextOpenGL2-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkRenderingImage-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkRenderingVolumeOpenGL2-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkViewsContext2D-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkViewsInfovis-8.0.so.1
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_shape.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_superres.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_bgsegm.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_bioinspired.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_dpm.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_face.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_freetype.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_fuzzy.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_hdf.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_line_descriptor.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_optflow.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_plot.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_reg.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_saliency.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_stereo.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_structured_light.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_surface_matching.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_text.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_ximgproc.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.3.2.0
+IFTWT_RG: /usr/local/lib/libpcl_common.so
+IFTWT_RG: /usr/local/lib/libpcl_octree.so
+IFTWT_RG: /usr/local/lib/libpcl_io.so
+IFTWT_RG: /usr/local/lib/libpcl_kdtree.so
+IFTWT_RG: /usr/local/lib/libpcl_search.so
+IFTWT_RG: /usr/local/lib/libpcl_sample_consensus.so
+IFTWT_RG: /usr/local/lib/libpcl_filters.so
+IFTWT_RG: /usr/local/lib/libpcl_features.so
+IFTWT_RG: /usr/local/lib/libpcl_ml.so
+IFTWT_RG: /usr/local/lib/libpcl_segmentation.so
+IFTWT_RG: /usr/local/lib/libpcl_visualization.so
+IFTWT_RG: /usr/local/lib/libpcl_surface.so
+IFTWT_RG: /usr/local/lib/libpcl_registration.so
+IFTWT_RG: /usr/local/lib/libpcl_keypoints.so
+IFTWT_RG: /usr/local/lib/libpcl_tracking.so
+IFTWT_RG: /usr/local/lib/libpcl_recognition.so
+IFTWT_RG: /usr/local/lib/libpcl_stereo.so
+IFTWT_RG: /usr/local/lib/libpcl_outofcore.so
+IFTWT_RG: /usr/local/lib/libpcl_people.so
+IFTWT_RG: /usr/local/lib/libvtkDomainsChemistry-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersAMR-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersParallel-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkexoIIc-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIONetCDF-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtknetcdf_c++.so.4.2.0
+IFTWT_RG: /usr/local/lib/libvtkNetCDF-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkhdf5_hl-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkhdf5-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkParallelCore-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkImagingMath-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkChartsCore-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersImaging-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkInfovisLayout-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkInfovisCore-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkViewsCore-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkInteractionWidgets-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersHybrid-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkImagingGeneral-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkImagingSources-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkRenderingVolume-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOXML-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOXMLParser-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkexpat-8.0.so.1
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_video.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_viz.so.3.2.0
+IFTWT_RG: /usr/local/lib/libvtkFiltersTexture-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkImagingHybrid-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkInteractionStyle-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersExtraction-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersStatistics-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkImagingFourier-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkalglib-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkRenderingAnnotation-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkImagingColor-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOExport-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkImagingCore-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkRenderingContext2D-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOImage-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkDICOMParser-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkmetaio-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkpng-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtktiff-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkjpeg-8.0.so.1
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libm.so
+IFTWT_RG: /usr/local/lib/libvtkRenderingGL2PSOpenGL2-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkRenderingOpenGL2-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkglew-8.0.so.1
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libSM.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libICE.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libX11.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libXext.so
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libXt.so
+IFTWT_RG: /usr/local/lib/libvtkgl2ps-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtklibharu-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOGeometry-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOLegacy-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOPLY-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkIOCore-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtklz4-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkRenderingLOD-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersModeling-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkRenderingLabel-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkRenderingFreeType-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkRenderingCore-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkCommonColor-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersGeometry-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersSources-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersGeneral-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkCommonComputationalGeometry-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkFiltersCore-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkCommonExecutionModel-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkCommonDataModel-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkCommonTransforms-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkCommonMisc-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkCommonMath-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkCommonSystem-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkCommonCore-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtksys-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkfreetype-8.0.so.1
+IFTWT_RG: /usr/local/lib/libvtkzlib-8.0.so.1
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_phase_unwrapping.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_rgbd.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_flann.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_ml.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_videoio.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.3.2.0
+IFTWT_RG: /usr/lib/x86_64-linux-gnu/libopencv_core.so.3.2.0
 IFTWT_RG: CMakeFiles/IFTWT_RG.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/Lab/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable IFTWT_RG"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable IFTWT_RG"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/IFTWT_RG.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -355,6 +314,6 @@ CMakeFiles/IFTWT_RG.dir/clean:
 .PHONY : CMakeFiles/IFTWT_RG.dir/clean
 
 CMakeFiles/IFTWT_RG.dir/depend:
-	cd /Users/Lab/CLionProjects/IFTWT_RG/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/Lab/CLionProjects/IFTWT_RG /Users/Lab/CLionProjects/IFTWT_RG /Users/Lab/CLionProjects/IFTWT_RG/cmake-build-debug /Users/Lab/CLionProjects/IFTWT_RG/cmake-build-debug /Users/Lab/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/IFTWT_RG.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pedro/CLionProjects/IFTWT_RG /home/pedro/CLionProjects/IFTWT_RG /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/IFTWT_RG.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/IFTWT_RG.dir/depend
 

@@ -6,13 +6,15 @@
 #include <pcl/filters/extract_indices.h>
 #include <pcl/common/centroid.h>
 
+typedef pcl::PointXYZ Point;
+typedef pcl::PointCloud<Point> Cloud;
 template <typename PointT, typename NormalT>
 class FlatPoint : public pcl::RegionGrowing<PointT,NormalT>{
 public:
     FlatPoint<PointT,NormalT>() :
         centroids_ (0),
         is_computed_centroid_info (false),
-        centroids_cloud_ (new pcl::PointCloud<pcl::PointXYZ>),
+        centroids_cloud_ (new pcl::PointCloud<PointT>),
         centroids_normals_ (new pcl::PointCloud<pcl::Normal>)
     {};
 
@@ -47,16 +49,18 @@ public:
         return centroids_normals_;
     }
 
-    pcl::PointCloud<pcl::PointXYZ>::Ptr getCentroidsCloud(){
+    Cloud::Ptr getCentroidsCloud(){
         if(!is_computed_centroid_info)
             compute_centroid_info();
-        return centroids_cloud_;
+        Cloud::Ptr c (new Cloud());
+        pcl::copyPointCloud(*centroids_cloud_,*c);
+        return c;
     }
 
 
 protected:
     std::vector<Eigen::Vector4f> centroids_;
-    boost::shared_ptr <pcl::PointCloud<pcl::PointXYZ> > centroids_cloud_;
+    boost::shared_ptr <pcl::PointCloud<PointT>>  centroids_cloud_;
     boost::shared_ptr <pcl::PointCloud<pcl::Normal> > centroids_normals_;
     bool is_computed_centroid_info;
 
@@ -67,7 +71,7 @@ protected:
         std::vector<float> nn_dists (1);
 
         for(const Eigen::Vector4f &centroid: centroids_ ){
-            pcl::PointXYZ p;
+            PointT p;
             p.x = centroid[0]; p.y = centroid[1]; p.z = centroid[2];
             this->search_->nearestKSearch(p,1, nn_indices, nn_dists);
 
