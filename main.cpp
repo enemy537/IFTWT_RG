@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <pcl/point_types.h>
-#include <pcl/io/pcd_io.h>
+#include <pcl/io/ply_io.h>
 #include <pcl/visualization/cloud_viewer.h>
 #include <pcl/octree/octree_pointcloud_adjacency.h>
 #include <pcl/features/normal_3d_omp.h>
@@ -80,15 +80,14 @@ CloudI::Ptr cloudGray(CloudT::Ptr cloud)
 }
 
 int main (int argc, char** argv) {
-    CloudT::Ptr cloud_raw (new CloudT());
-    if ( pcl::io::loadPCDFile <PointT> ("../cloud/lucy.pcd", *cloud_raw) == -1) {
+
+    CloudI::Ptr cloud_i (new CloudI());
+    if ( pcl::io::loadPLYFile <PointI> ("../cloud/igreja.ply", *cloud_i) == -1) {
         std::cout << "Cloud reading failed." << std::endl;
         return (-1);
     }
 
-    CloudI::Ptr cloud_i = cloudGray(cloud_raw);
-
-    Graph gg (cloud_i,1000);
+    Graph gg (cloud_i, 10);
 
     CloudI::Ptr cloud_g = gg.morph_gradient();
     graph_t g = gg.pc_to_g(cloud_g);
@@ -109,27 +108,32 @@ int main (int argc, char** argv) {
     reg.setNumberOfNeighbours (50);
     reg.setInputCloud (cloud_g);
     reg.setInputNormals (normals);
-    reg.setSmoothnessThreshold (2.0 / 180.0 * M_PI);
+    reg.setSmoothnessThreshold (5.0 / 180.0 * M_PI);
     reg.setCurvatureThreshold (1.0);
 
-    pcl::PointCloud <pcl::PointXYZ>::Ptr centroid_cloud = reg.getCentroidsCloud ();
+//    pcl::PointCloud <pcl::PointXYZ>::Ptr centroid_cloud = reg.getCentroidsCloud ();
+//
+//    IFT_PCD ift(g,centroid_cloud);
+//
+//    pcl::PointCloud <pcl::PointXYZRGB>::Ptr colored_cloud = ift.getLabelCloud();
+//
+//    pcl::io::savePLYFile("gradient.ply", *cloud_g);
+//    pcl::io::savePLYFile("labels.ply", *colored_cloud);
 
-    IFT_PCD ift(g,centroid_cloud);
-    cloud_g = ift.gv_to_pc();
+// Visualization stuff
 
-    // Normal visualization stuff
-    boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer (new pcl::visualization::PCLVisualizer ("3d cloud"));
-    pcl::visualization::PointCloudColorHandlerGenericField<pcl::PointXYZI> intensity (cloud_g,"intensity");
-    viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "cloud");
-    viewer->addPointCloud<pcl::PointXYZI>(cloud_g,intensity,"cloud");
-    viewer->setBackgroundColor (0, 0, 0);
-    viewer->removeOrientationMarkerWidgetAxes();
-    viewer->initCameraParameters ();
+    std::vector <pcl::PointIndices> clusters;
+    reg.extract (clusters);
+    pcl::PointCloud <pcl::PointXYZRGB>::Ptr colored_cloud = reg.getColoredCloud ();
 
-    while (!viewer->wasStopped ()){
-        viewer->spinOnce(100);
-        boost::this_thread::sleep (boost::posix_time::microseconds (100000));
-    }
+//    for(pcl::PointXYZ &point : centroid_cloud->points){
+//        viewer->addSphere(point,.5,std::to_string(point.x));
+//    }
+
+
+    pcl::visualization::CloudViewer viewer ("Cluster viewer");
+    viewer.showCloud(colored_cloud);
+    while (!viewer.wasStopped ()) {}
 
 
     return (0);

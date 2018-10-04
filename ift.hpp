@@ -55,6 +55,9 @@ typedef boost::adjacency_list<boost::setS, boost::setS, boost::undirectedS,
 typedef boost::graph_traits<graph_v>::vertex_descriptor pcd_vx_descriptor;
 typedef boost::graph_traits<graph_v>::vertex_iterator pcd_vx_iterator;
 
+static bool p_equal (const PointI& pi, const Point& p){
+    return pi.x == p.x && pi.y == p.y && pi.z == p.z;
+};
 
 class IFT_PCD{
 public:
@@ -63,6 +66,39 @@ public:
         this->seeds = seeds;
         copy_graph();
         add_seeds();
+        compute_watershed();
+    }
+
+    pcl::PointCloud<pcl::PointXYZRGB>::Ptr getLabelCloud()
+    {
+        pcl::PointCloud<pcl::PointXYZRGB>::Ptr out (new pcl::PointCloud<pcl::PointXYZRGB>());
+
+        std::map<pcd_vx_descriptor , std::vector<int>> colors;
+        auto random = []{
+            std::vector<int> colors;
+            colors.push_back(rand()%255);
+            colors.push_back(rand()%255);
+            colors.push_back(rand()%255);
+            return colors;
+        };
+
+        for(auto it : root_m){
+            pcl::PointXYZRGB point;
+            point.x = g_v[it.first].point.x;
+            point.y = g_v[it.first].point.y;
+            point.z = g_v[it.first].point.z;
+
+            if(colors.find(it.second) == colors.end())
+                colors[it.second] = random();
+
+            std::vector<int> color = colors[it.second];
+            point.r = color[0];
+            point.g = color[1];
+            point.b = color[2];
+
+            out->points.emplace_back(point);
+        }
+        return out;
     }
 
     CloudI::Ptr gv_to_pc()
@@ -91,18 +127,20 @@ private:
     void add_seeds()
     {
         graph_v g_in = g_v;
-        auto p_equal = [](const PointI& pi, const Point& p){
-            return pi.x == p.x && pi.y == p.y && pi.z == p.z;
-        };
         BGL_FORALL_VERTICES(v,g_v,graph_v)
         {
-            bool pmin = std::find_if(seeds->points.begin(), seeds->points.end(),
-                        [&g_in,&v](const Point &p) {
-                        return p_equal(g_in[v].point,p);} != seeds->points.end());
-            if(pmin) g_in[v].cost = MIN_COST;
+            for(auto it = seeds->points.begin(); it != seeds->points.end(); it++)
+            {
+                bool pmin = p_equal(g_in[v].point,*it);
+                if(pmin)
+                {
+                    g_in[v].cost = MIN_COST;
+                    break;
+                }
+            }
         }
     }
-    void compute()
+    void compute_watershed()
     {
         /**
          * Trivial initialization
