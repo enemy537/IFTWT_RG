@@ -178,7 +178,34 @@ public:
         }
         return out;
     }
-
+    void smooth_by_mean()
+    {
+#pragma omp parallel
+        {
+#pragma omp single
+            {
+                BGL_FORALL_VERTICES(v, g_, graph_t)
+                {
+#pragma omp task
+                    {
+                        int num_adj = 0, sum = 0;
+                        const auto adj_v = boost::adjacent_vertices(v, g_);
+                        for (auto adj = adj_v.first; adj != adj_v.second; adj++) {
+                            sum += g_[*adj].intensity;
+                            num_adj++;
+                        }
+                        g_[v].intensity = (int) sum / num_adj;
+                    }
+                }
+            }
+        }
+    }
+    CloudI::Ptr morph_erode_gradient()
+    {
+        CloudI::Ptr out = morph_gradient();
+        g_ = pc_to_g(out);
+        return morph_erode(out);
+    }
 protected:
     double
     computeCloudResolution ()
