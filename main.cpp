@@ -109,8 +109,9 @@ int main (int argc, char** argv) {
     global::Cloud::Ptr centroid_cloud = reg.getCentroidsCloud ();
 
     IFT_PCD ift(g,centroid_cloud);
+    Cluster c(ift.getMST(),ift.getRoots(),ift.getGraph(),10);
 
-    global::CloudT::Ptr colored_cloud = ift.getLabelCloud();
+    global::CloudT::Ptr colored_cloud = c.getLabelCloud();
 //
 //    pcl::io::savePLYFile("gradient.ply", *cloud_g);
 //    pcl::io::savePLYFile("labels.ply", *colored_cloud);

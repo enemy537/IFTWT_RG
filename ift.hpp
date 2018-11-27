@@ -22,31 +22,6 @@ typedef struct {
     }
 } r_info;
 
-template<class T,
-         class Container = std::vector<T>,
-         class Compare = std::less<typename Container::value_type>>
-class custom_priority_queue : public std::priority_queue<T,Container,Compare>
-{
-public:
-    bool remove(const T& value)
-    {
-        auto it = std::find(this->c.begin(), this->c.end(), value);
-        if(it != this->c.end())
-        {
-            this->c.erase(it);
-            std::make_heap(this->c.begin(), this->c.end(), this->comp);
-            return true;
-        } else
-            return false;
-    }
-    void print()
-    {
-        for(auto it = this->c.begin(); it != this->c.end(); ++it)
-            std::cout << *it << " ";
-        std::cout << std::endl;
-    }
-};
-
 static bool p_equal (const global::PointI& pi, const global::Point& p){
     return pi.x == p.x && pi.y == p.y && pi.z == p.z;
 };
@@ -60,7 +35,15 @@ public:
         add_seeds();
         compute_watershed();
     }
-
+    std::map<std::pair<global::pcd_vx_descriptor, global::pcd_vx_descriptor>, double> getMST()  {
+        return mst;
+    }
+    std::map<global::pcd_vx_descriptor, global::pcd_vx_descriptor> getRoots()  {
+        return root_m;
+    }
+    global::graph_v getGraph(){
+        return g_v;
+    }
     global::CloudT::Ptr getLabelCloud()
     {
         global::CloudT::Ptr out (new global::CloudT());
@@ -232,7 +215,7 @@ private:
         };
     };
     std::map<global::pcd_vx_descriptor, global::pcd_vx_descriptor> root_m;
-    custom_priority_queue<pair, std::vector<pair>,cmp> Q;
+    global::custom_priority_queue<pair, std::vector<pair>,cmp> Q;
     /** MST auxiliary structures **/
     std::map<std::pair<global::pcd_vx_descriptor,global::pcd_vx_descriptor>, double> mst;
     std::map<global::pcd_vx_descriptor, r_info> r_info_m;

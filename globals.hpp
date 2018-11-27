@@ -51,6 +51,32 @@ namespace global{
     VertexBundle,EdgeBundle> graph_v;
     typedef boost::graph_traits<graph_v>::vertex_descriptor pcd_vx_descriptor;
     typedef boost::graph_traits<graph_v>::vertex_iterator pcd_vx_iterator;
+
+    template<class T,
+            class Container = std::vector<T>,
+            class Compare = std::less<typename Container::value_type>>
+    class custom_priority_queue : public std::priority_queue<T,Container,Compare>
+    {
+    public:
+        bool remove(const T& value)
+        {
+            auto it = std::find(this->c.begin(), this->c.end(), value);
+            if(it != this->c.end())
+            {
+                this->c.erase(it);
+                std::make_heap(this->c.begin(), this->c.end(), this->comp);
+                return true;
+            } else
+                return false;
+        }
+        Container& getContainer() { return this->c; }
+        void print()
+        {
+            for(auto it = this->c.begin(); it != this->c.end(); ++it)
+                std::cout << *it << " ";
+            std::cout << std::endl;
+        }
+    };
 }
 
 #endif //IFTWT_RG_GLOBALS_H
