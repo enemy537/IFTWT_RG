@@ -1,29 +1,26 @@
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/property_map/transform_value_property_map.hpp>
-#include <boost/property_map/transform_value_property_map.hpp>
-#include <boost/graph/graph_traits.hpp>
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/copy.hpp>
-#include <boost/graph/graph_utility.hpp>
-#include <queue>
-#include <iostream>
-#include <map>
-#include <queue>
-#include <algorithm>
-
 #define MAX_COST 500
 #define MIN_COST 0
 
-struct VertexBundle{
-    unsigned int cost;
-    PointI point;
-};
-class EdgeBundle {
-public:
-    EdgeBundle( unsigned int weight=0) : weight(weight){}
+/** MST */
+typedef struct {
+    double height = 0.0;
+    double area = 0.0;
+    double volume = 0.0;
+    bool status = false;
 
-    unsigned int weight;
-};
+    void update(double seed_i){
+        area += 1;
+        if(seed_i > height)
+            height = seed_i;
+        volume += area*height;
+    }
+
+    void print(){
+        std::cout << "height " << height << ", area " <<
+                  area << ", volume " << volume << ", status " <<
+                  status << std::endl;
+    }
+} r_info;
 
 template<class T,
          class Container = std::vector<T>,
@@ -50,18 +47,13 @@ public:
     }
 };
 
-typedef boost::adjacency_list<boost::setS, boost::setS, boost::undirectedS,
-        VertexBundle,EdgeBundle> graph_v;
-typedef boost::graph_traits<graph_v>::vertex_descriptor pcd_vx_descriptor;
-typedef boost::graph_traits<graph_v>::vertex_iterator pcd_vx_iterator;
-
-static bool p_equal (const PointI& pi, const Point& p){
+static bool p_equal (const global::PointI& pi, const global::Point& p){
     return pi.x == p.x && pi.y == p.y && pi.z == p.z;
 };
 
 class IFT_PCD{
 public:
-    IFT_PCD(graph_t& g_t, Cloud::Ptr seeds){
+    IFT_PCD(global::graph_t& g_t, global::Cloud::Ptr seeds){
         this->g_t = g_t;
         this->seeds = seeds;
         copy_graph();
@@ -69,11 +61,11 @@ public:
         compute_watershed();
     }
 
-    pcl::PointCloud<pcl::PointXYZRGB>::Ptr getLabelCloud()
+    global::CloudT::Ptr getLabelCloud()
     {
-        pcl::PointCloud<pcl::PointXYZRGB>::Ptr out (new pcl::PointCloud<pcl::PointXYZRGB>());
+        global::CloudT::Ptr out (new global::CloudT());
 
-        std::map<pcd_vx_descriptor , std::vector<int>> colors;
+        std::map<global::pcd_vx_descriptor , std::vector<int>> colors;
         auto random = []{
             std::vector<int> colors;
             colors.push_back(rand()%255);
@@ -83,7 +75,7 @@ public:
         };
 
         for(auto it : root_m){
-            pcl::PointXYZRGB point;
+            global::PointT point;
             point.x = g_v[it.first].point.x;
             point.y = g_v[it.first].point.y;
             point.z = g_v[it.first].point.z;
@@ -101,9 +93,9 @@ public:
         return out;
     }
 
-    CloudI::Ptr gv_to_pc()
+    global::CloudI::Ptr gv_to_pc()
     {
-        CloudI::Ptr out (new CloudI());
+        global::CloudI::Ptr out (new global::CloudI());
         const auto vd_v = vertices(g_v);
         for (auto v = vd_v.first; v != vd_v.second; ++v) {
             out->push_back(g_v[*v].point);
@@ -113,21 +105,21 @@ public:
 private:
 
     void copy_graph(){
-        std::map<graph_t::vertex_descriptor, pcd_vx_descriptor> map;
-        BGL_FORALL_VERTICES(v,g_t,graph_t)
+        std::map<global::graph_t::vertex_descriptor, global::pcd_vx_descriptor> map;
+        BGL_FORALL_VERTICES(v,g_t,global::graph_t)
         {
-            pcd_vx_descriptor pcd_vx = boost::add_vertex({MAX_COST,g_t[v]},g_v);
+            global::pcd_vx_descriptor pcd_vx = boost::add_vertex({MAX_COST,g_t[v]},g_v);
             map[v] = pcd_vx;
         }
-        BGL_FORALL_EDGES(e,g_t,graph_t)
+        BGL_FORALL_EDGES(e,g_t,global::graph_t)
         {
             boost::add_edge(map[boost::source(e,g_t)],map[boost::target(e,g_t)],g_v);
         }
     }
     void add_seeds()
     {
-        graph_v g_in = g_v;
-        BGL_FORALL_VERTICES(v,g_v,graph_v)
+        global::graph_v g_in = g_v;
+        BGL_FORALL_VERTICES(v,g_v,global::graph_v)
         {
             for(auto it = seeds->points.begin(); it != seeds->points.end(); it++)
             {
@@ -135,11 +127,22 @@ private:
                 if(pmin)
                 {
                     g_in[v].cost = MIN_COST;
+                    /** MST */
+                    double seed_i = g_in[v].point.intensity;
+                    r_info_m[v] = r_info{seed_i,1};
                     break;
                 }
             }
         }
     }
+
+    void find_and_swap(global::pcd_vx_descriptor old_,  global::pcd_vx_descriptor new_)
+    {
+        for(auto it = root_mst.begin();it != root_mst.end();it++)
+            if(it->second == old_)
+                root_mst[it->first] = new_;
+    }
+
     void compute_watershed()
     {
         /**
@@ -148,6 +151,7 @@ private:
         for(auto t : boost::make_iterator_range(boost::vertices(g_v)))
         {
             root_m[t] = t;
+            root_mst[t] = t;
             if(g_v[t].cost != MAX_COST)
                 Q.push(pair(t,g_v[t].cost));
         }
@@ -157,7 +161,9 @@ private:
          */
         while(!Q.empty())
         {
-            pcd_vx_descriptor s = Q.top().first; Q.pop();
+            global::pcd_vx_descriptor s = Q.top().first; Q.pop();
+            /** MST */
+            auto s_root = root_mst[s];
             const auto s_adj = boost::adjacent_vertices(s,g_v);
             for(auto t = s_adj.first; t != s_adj.second; ++t )
             {
@@ -171,22 +177,65 @@ private:
                         g_v[*t].cost = tmp;
                         root_m[*t] = root_m[s];
                         Q.push(pair(*t,g_v[*t].cost));
+
+                        /** New member add - update region info **/
+                        root_mst[*t] = root_mst[s];
+                        r_info_m[s_root].update(g_v[*t].point.intensity);
+
+                        const auto r_adj = boost::adjacent_vertices(*t,g_v);
+                        for(auto r = r_adj.first; r != r_adj.second; ++r)
+                        {
+                            /** MST -----------BLOCK-START---------- **/
+                            global::pcd_vx_descriptor r_root = root_mst[*r];
+                            bool exists = false;
+                            if(r_info_m.find(r_root) != r_info_m.end())
+                                exists = true;
+
+                            if(exists && r_root != s_root && !r_info_m[s_root].status)
+                            {
+                                r_info_m[s_root].status = true;
+                                double s_volume = r_info_m[s_root].volume,
+                                        r_volume = r_info_m[r_root].volume,
+                                        MST_weight = 0;
+                                if(s_volume < r_volume){
+                                    MST_weight = s_volume;
+                                    find_and_swap(s_root,r_root);
+
+                                    r_info_m[r_root].area += r_info_m[s_root].area;
+                                    r_info_m[r_root].volume += r_info_m[s_root].volume;
+                                }else{
+                                    MST_weight = r_volume;
+                                    auto it = root_mst.find(r_root);
+                                    find_and_swap(r_root,s_root);
+
+                                    r_info_m[s_root].area += r_info_m[r_root].area;
+                                    r_info_m[s_root].volume += r_info_m[r_root].volume;
+                                }
+                                mst[std::make_pair(s_root,r_root)] = MST_weight;
+                            }
+                            /** MST -----------BLOCK-END---------- **/
+                        }
                     }
                 }
             }
         }
     }
 
-    graph_v g_v;
-    graph_t g_t;
-    Cloud::Ptr seeds;
+    global::graph_v g_v;
+    global::graph_t g_t;
+    global::Cloud::Ptr seeds;
 
-    using pair = std::pair<pcd_vx_descriptor, unsigned int>;
+    using pair = std::pair<global::pcd_vx_descriptor, unsigned int>;
     struct cmp {
         bool operator()(const pair &a, const pair &b) {
             return a.second > b.second;
         };
     };
-    std::map<pcd_vx_descriptor , pcd_vx_descriptor> root_m;
+    std::map<global::pcd_vx_descriptor, global::pcd_vx_descriptor> root_m;
     custom_priority_queue<pair, std::vector<pair>,cmp> Q;
+    /** MST auxiliary structures **/
+    std::map<std::pair<global::pcd_vx_descriptor,global::pcd_vx_descriptor>, double> mst;
+    std::map<global::pcd_vx_descriptor, r_info> r_info_m;
+    std::map<global::pcd_vx_descriptor, global::pcd_vx_descriptor> root_mst;
+
 };

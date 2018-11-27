@@ -6,8 +6,6 @@
 #include <pcl/filters/extract_indices.h>
 #include <pcl/common/centroid.h>
 
-typedef pcl::PointXYZ Point;
-typedef pcl::PointCloud<Point> Cloud;
 template <typename PointT, typename NormalT>
 class FlatPoint : public pcl::RegionGrowing<PointT,NormalT>{
 public:
@@ -49,10 +47,10 @@ public:
         return centroids_normals_;
     }
 
-    Cloud::Ptr getCentroidsCloud(){
+    global::Cloud::Ptr getCentroidsCloud(){
         if(!is_computed_centroid_info)
             compute_centroid_info();
-        Cloud::Ptr c (new Cloud());
+        global::Cloud::Ptr c (new global::Cloud());
         pcl::copyPointCloud(*centroids_cloud_,*c);
         return c;
     }

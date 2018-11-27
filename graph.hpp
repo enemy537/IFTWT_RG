@@ -1,32 +1,25 @@
 //
 // Created by avell on 07/05/18.
 //
-#include <pcl/pcl_base.h>
 #include <pcl/octree/octree_pointcloud_adjacency.h>
 #include <pcl/search/kdtree.h>
 #include <pcl/visualization/pcl_visualizer.h>
-#include <boost/property_map/property_map.hpp>
-#include <boost/graph/adjacency_list.hpp>
-#include <boost/graph/copy.hpp>
 #include <vtkRenderWindow.h>
 #include <vtkCubeSource.h>
 #include <vtkCleanPolyData.h>
 
-typedef pcl::PointXYZI PointI;
-typedef pcl::PointCloud<PointI> CloudI;
-typedef boost::adjacency_list<boost::setS, boost::setS, boost::undirectedS, PointI, float> graph_t;
 enum class MORPH : char {bin_erode = 1,bin_dilate = 2,dilate = 3,erode = 4};
 
-CloudI::Ptr g_to_pc(graph_t& g_)
+global::CloudI::Ptr g_to_pc(global::graph_t& g_)
 {
-    auto deep_copy = [](const PointI& p1){
-        PointI p (p1.intensity);
+    auto deep_copy = [](const global::PointI& p1){
+        global::PointI p (p1.intensity);
         p.x = p1.x; p.y = p1.y; p.z = p1.z;
         return p;
     };
 
-    CloudI::Ptr out (new CloudI());
-    using vd = typename graph_t::vertex_descriptor;
+    global::CloudI::Ptr out (new global::CloudI());
+    using vd = typename global::graph_t::vertex_descriptor;
     const auto vd_v = vertices(g_);
     for (auto v = vd_v.first; v != vd_v.second; ++v) {
 
@@ -36,16 +29,16 @@ CloudI::Ptr g_to_pc(graph_t& g_)
 };
 class Graph {
 public:
-    Graph(pcl::PointCloud<PointI>::Ptr cloud) : voxel_size(0),overlap(9.e+2),
-                                                tree_(new pcl::search::KdTree<PointI>),
+    Graph(global::CloudI::Ptr cloud) : voxel_size(0),overlap(9.e+2),
+                                                tree_(new pcl::search::KdTree<global::PointI>),
                                                 octree_(nullptr)
     {
         cloud_ = cloud;
         tree_->setInputCloud(cloud_);
         initialize();
     };
-    Graph(pcl::PointCloud<PointI>::Ptr cloud, double ovrlp) : voxel_size(0),
-                                                              tree_(new pcl::search::KdTree<PointI>),
+    Graph(global::CloudI::Ptr cloud, double ovrlp) : voxel_size(0),
+                                                              tree_(new pcl::search::KdTree<global::PointI>),
                                                               octree_(nullptr)
     {
         overlap = ovrlp;
@@ -54,7 +47,7 @@ public:
         initialize();
     };
     ~Graph(){ }
-    void setInputCloud(pcl::PointCloud<PointI >::Ptr cloud)
+    void setInputCloud(global::CloudI::Ptr cloud)
     {
         cloud_ = cloud;
         tree_->setInputCloud (cloud_);
@@ -65,14 +58,14 @@ public:
         this->overlap = overlap;
         initialize();
     }
-    graph_t getAdjacencyList()
+    global::graph_t getAdjacencyList()
     {
         return g_;
     };
     boost::shared_ptr<pcl::visualization::PCLVisualizer> voxelViewer()
     {
         //     Voxel visualization stuff
-        typedef std::vector< PointI, Eigen::aligned_allocator<PointI> > AlignedPointTVector;
+        typedef std::vector< global::PointI, Eigen::aligned_allocator<global::PointI> > AlignedPointTVector;
         AlignedPointTVector voxelCenters;
 
         voxelCenters.clear();
@@ -126,36 +119,36 @@ public:
 
         viewer->getRenderWindow()->GetRenderers()->GetFirstRenderer()->AddActor(multiActor);
 
-        viewer->addPointCloud<PointI>(cloud_, "color_cloud");
+        viewer->addPointCloud<global::PointI>(cloud_, "color_cloud");
         viewer->setBackgroundColor (0, 0, 0);
         viewer->setPointCloudRenderingProperties(
                 pcl::visualization::PCL_VISUALIZER_POINT_SIZE,3,"color_cloud");
         return viewer;
     };
-    CloudI::Ptr morph_bin_erode(CloudI::Ptr out)
+    global::CloudI::Ptr morph_bin_erode(global::CloudI::Ptr out)
     {
         return morph_base(MORPH::bin_erode,out);
     }
-    CloudI::Ptr morph_bin_dilate(CloudI::Ptr out)
+    global::CloudI::Ptr morph_bin_dilate(global::CloudI::Ptr out)
     {
         return morph_base(MORPH::bin_dilate,out);
     }
-    CloudI::Ptr morph_erode(CloudI::Ptr out)
+    global::CloudI::Ptr morph_erode(global::CloudI::Ptr out)
     {
         return morph_base(MORPH::erode,out);
     }
-    CloudI::Ptr morph_dilate(CloudI::Ptr out)
+    global::CloudI::Ptr morph_dilate(global::CloudI::Ptr out)
     {
         return morph_base(MORPH::dilate,out);
     }
-    CloudI::Ptr morph_gradient()
+    global::CloudI::Ptr morph_gradient()
     {
-        CloudI::Ptr cloud_e (new CloudI);
-        CloudI::Ptr cloud_d (new CloudI);
+        global::CloudI::Ptr cloud_e (new global::CloudI);
+        global::CloudI::Ptr cloud_d (new global::CloudI);
         this->morph_erode(cloud_e);
         this->morph_dilate(cloud_d);
 
-        CloudI::Ptr cloud_g (new CloudI);
+        global::CloudI::Ptr cloud_g (new global::CloudI);
         pcl::copyPointCloud(*cloud_d,*cloud_g);
 
         for(int i = 0; i < cloud_g->size(); i++){
@@ -165,13 +158,13 @@ public:
         }
         return cloud_g;
     }
-    graph_t pc_to_g(CloudI::Ptr cloud)
+    global::graph_t pc_to_g(global::CloudI::Ptr cloud)
     {
-        pcl::search::KdTree<PointI>::Ptr tree (new pcl::search::KdTree<PointI>);
-        graph_t out = copy_g();
+        pcl::search::KdTree<global::PointI>::Ptr tree (new pcl::search::KdTree<global::PointI>);
+        global::graph_t out = copy_g();
         tree->setInputCloud(cloud);
 
-        BGL_FORALL_VERTICES(v,out,graph_t)
+        BGL_FORALL_VERTICES(v,out,global::graph_t)
         {
             int id_out = find_p(tree,g_[v]);
             out[v].intensity = cloud->points[id_out].intensity;
@@ -184,7 +177,7 @@ public:
         {
 #pragma omp single
             {
-                BGL_FORALL_VERTICES(v, g_, graph_t)
+                BGL_FORALL_VERTICES(v, g_, global::graph_t)
                 {
 #pragma omp task
                     {
@@ -200,9 +193,9 @@ public:
             }
         }
     }
-    CloudI::Ptr morph_erode_gradient()
+    global::CloudI::Ptr morph_erode_gradient()
     {
-        CloudI::Ptr out = morph_gradient();
+        global::CloudI::Ptr out = morph_gradient();
         g_ = pc_to_g(out);
         return morph_erode(out);
     }
@@ -239,7 +232,7 @@ protected:
         }
         return res;
     }
-    int find_p(pcl::search::KdTree<PointI>::Ptr tree, const PointI& p)
+    int find_p(pcl::search::KdTree<global::PointI>::Ptr tree, const global::PointI& p)
     {
         std::vector<int> nn_i (1);
         std::vector<float> nn_d (1);
@@ -256,17 +249,17 @@ protected:
         }
     }
 private:
-    pcl::PointCloud<PointI>::Ptr cloud_;
-    pcl::search::KdTree<PointI>::Ptr tree_;
+    pcl::PointCloud<global::PointI>::Ptr cloud_;
+    pcl::search::KdTree<global::PointI>::Ptr tree_;
     double voxel_size, overlap;
-    graph_t g_;
-    pcl::octree::OctreePointCloudAdjacency<PointI>::Ptr octree_;
+    global::graph_t g_;
+    pcl::octree::OctreePointCloudAdjacency<global::PointI>::Ptr octree_;
 
     void initialize()
     {
         voxel_size = computeCloudResolution();
         // Compute the octree adjacency tree
-        octree_.reset(new pcl::octree::OctreePointCloudAdjacency<PointI>(voxel_size));
+        octree_.reset(new pcl::octree::OctreePointCloudAdjacency<global::PointI>(voxel_size));
         octree_->setInputCloud(cloud_);
         octree_->addPointsFromInputCloud();
 
@@ -278,21 +271,21 @@ private:
         optimizeGraph();
         cloud_.reset();
     };
-    graph_t copy_g()
+    global::graph_t copy_g()
     {
-        std::map<graph_t::vertex_descriptor, int> index;
+        std::map<global::graph_t::vertex_descriptor, int> index;
         for (auto v : boost::make_iterator_range(boost::vertices(g_))) {
             index.insert(std::make_pair(v, index.size()));
         }
-        graph_t g_out;
+        global::graph_t g_out;
         boost::copy_graph(g_,g_out,
                           boost::vertex_index_map(boost::make_assoc_property_map(index)));
         return g_out;
     }
-    CloudI::Ptr morph_base(MORPH type, CloudI::Ptr& out){
-        graph_t g_in = g_;
+    global::CloudI::Ptr morph_base(MORPH type, global::CloudI::Ptr& out){
+        global::graph_t g_in = g_;
         out->swap(*g_to_pc(g_));
-        pcl::search::KdTree<PointI>::Ptr tree (new pcl::search::KdTree<PointI>);
+        pcl::search::KdTree<global::PointI>::Ptr tree (new pcl::search::KdTree<global::PointI>);
         tree->setInputCloud(out);
         const auto vd_g = vertices(g_in);
 #pragma omp parallel
@@ -303,7 +296,7 @@ private:
 #pragma omp task shared(out)
                     {
                         const auto adj_v = boost::adjacent_vertices(*v, g_in);
-                        using vd = typename graph_t::vertex_descriptor;
+                        using vd = typename global::graph_t::vertex_descriptor;
                         float intensity = 0;
 
                         if(type == MORPH::bin_erode){

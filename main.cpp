@@ -1,7 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <pcl/point_types.h>
-#include <pcl/io/ply_io.h>
+#include "globals.hpp"
 #include <pcl/visualization/cloud_viewer.h>
 #include <pcl/octree/octree_pointcloud_adjacency.h>
 #include <pcl/features/normal_3d_omp.h>
@@ -13,17 +10,15 @@
 #include "graph.hpp"
 #include "flat_point.hpp"
 #include "ift.hpp"
+#include "cluster.hpp"
 
-typedef pcl::PointXYZRGB PointT;
-typedef pcl::PointCloud<PointT> CloudT;
-
-CloudI::Ptr cloudRGB2GRAY(CloudT::Ptr cloud)
+global::CloudI::Ptr cloudRGB2GRAY(global::CloudT::Ptr cloud)
 {
-    CloudI::Ptr cloud_gray (new CloudI);
+    global::CloudI::Ptr cloud_gray (new global::CloudI);
     cloud_gray->height = cloud->height;
     cloud_gray->width = cloud->width;
 
-    for(CloudT::iterator it = cloud->begin(); it != cloud->end(); it++){
+    for(global::CloudT::iterator it = cloud->begin(); it != cloud->end(); it++){
         // Color conversion
         cv::Mat pixel(1,1,CV_8UC3,cv::Scalar(it->r,it->g,it->b));
         cv::Mat temp;
@@ -41,14 +36,14 @@ CloudI::Ptr cloudRGB2GRAY(CloudT::Ptr cloud)
     cv::Mat temp;
 
     int counter = 0;
-    for(CloudI::iterator it = cloud_gray->begin(); it != cloud_gray->end(); it++){
+    for(global::CloudI::iterator it = cloud_gray->begin(); it != cloud_gray->end(); it++){
         gray_values.at<uchar>(0,counter) = it->intensity;
         counter++;
     }
     double thres_v = cv::threshold(gray_values,temp,0,255,CV_THRESH_OTSU);
     std::cout << "Otsu threshold value = " << thres_v << std::endl;
 
-    for(CloudI::iterator it = cloud_gray->begin(); it != cloud_gray->end(); it++){
+    for(global::CloudI::iterator it = cloud_gray->begin(); it != cloud_gray->end(); it++){
         float v = it->intensity;
         if(v < thres_v) {it->intensity = 0;  }
         else            {it->intensity = 255;}
@@ -56,13 +51,13 @@ CloudI::Ptr cloudRGB2GRAY(CloudT::Ptr cloud)
 
     return cloud_gray;
 }
-CloudI::Ptr cloudGray(CloudT::Ptr cloud)
+global::CloudI::Ptr cloudGray(global::CloudT::Ptr cloud)
 {
-    CloudI::Ptr cloud_gray (new CloudI);
+    global::CloudI::Ptr cloud_gray (new global::CloudI);
     cloud_gray->height = cloud->height;
     cloud_gray->width = cloud->width;
 
-    for(CloudT::iterator it = cloud->begin(); it != cloud->end(); it++){
+    for(global::CloudT::iterator it = cloud->begin(); it != cloud->end(); it++){
         // Color conversion
         cv::Mat pixel(1,1,CV_8UC3,cv::Scalar(it->r,it->g,it->b));
         cv::Mat temp;
@@ -81,50 +76,50 @@ CloudI::Ptr cloudGray(CloudT::Ptr cloud)
 
 int main (int argc, char** argv) {
 
-    CloudI::Ptr cloud_i (new CloudI());
-    if ( pcl::io::loadPLYFile <PointI> ("../cloud/igreja.ply", *cloud_i) == -1) {
+    global::CloudI::Ptr cloud_i (new global::CloudI());
+    if ( pcl::io::loadPLYFile <global::PointI> ("../cloud/lucy_gray.ply", *cloud_i) == -1) {
         std::cout << "Cloud reading failed." << std::endl;
         return (-1);
     }
 
-    Graph gg (cloud_i, 10);
+    Graph gg (cloud_i);
 
-    CloudI::Ptr cloud_g = gg.morph_gradient();
-    graph_t g = gg.pc_to_g(cloud_g);
+    global::CloudI::Ptr cloud_g = gg.morph_gradient();
+    global::graph_t g = gg.pc_to_g(cloud_g);
 
-    pcl::search::Search<pcl::PointXYZI>::Ptr tree =
-            boost::shared_ptr<pcl::search::Search<pcl::PointXYZI> > (new pcl::search::KdTree<pcl::PointXYZI>);
+    pcl::search::Search<global::PointI>::Ptr tree =
+            boost::shared_ptr<pcl::search::Search<global::PointI> > (new pcl::search::KdTree<global::PointI>);
     pcl::PointCloud <pcl::Normal>::Ptr normals (new pcl::PointCloud <pcl::Normal>);
-    pcl::NormalEstimationOMP<pcl::PointXYZI, pcl::Normal> normal_estimator;
+    pcl::NormalEstimationOMP<global::PointI, pcl::Normal> normal_estimator;
     normal_estimator.setSearchMethod (tree);
     normal_estimator.setInputCloud (cloud_g);
-    normal_estimator.setKSearch (50);
+    normal_estimator.setKSearch (30);
     normal_estimator.compute (*normals);
 
-    FlatPoint<pcl::PointXYZI, pcl::Normal> reg;
+    FlatPoint<global::PointI, pcl::Normal> reg;
     reg.setMinClusterSize (50);
-    reg.setMaxClusterSize (100000);
+    reg.setMaxClusterSize (10000);
     reg.setSearchMethod (tree);
     reg.setNumberOfNeighbours (50);
     reg.setInputCloud (cloud_g);
     reg.setInputNormals (normals);
-    reg.setSmoothnessThreshold (5.0 / 180.0 * M_PI);
+    reg.setSmoothnessThreshold (3.0 / 180.0 * M_PI);
     reg.setCurvatureThreshold (1.0);
 
-//    pcl::PointCloud <pcl::PointXYZ>::Ptr centroid_cloud = reg.getCentroidsCloud ();
-//
-//    IFT_PCD ift(g,centroid_cloud);
-//
-//    pcl::PointCloud <pcl::PointXYZRGB>::Ptr colored_cloud = ift.getLabelCloud();
+    global::Cloud::Ptr centroid_cloud = reg.getCentroidsCloud ();
+
+    IFT_PCD ift(g,centroid_cloud);
+
+    global::CloudT::Ptr colored_cloud = ift.getLabelCloud();
 //
 //    pcl::io::savePLYFile("gradient.ply", *cloud_g);
 //    pcl::io::savePLYFile("labels.ply", *colored_cloud);
 
 // Visualization stuff
 
-    std::vector <pcl::PointIndices> clusters;
-    reg.extract (clusters);
-    pcl::PointCloud <pcl::PointXYZRGB>::Ptr colored_cloud = reg.getColoredCloud ();
+//    std::vector <pcl::PointIndices> clusters;
+//    reg.extract (clusters);
+//    pcl::PointCloud <pcl::PointXYZRGB>::Ptr colored_cloud = reg.getColoredCloud ();
 
 //    for(pcl::PointXYZ &point : centroid_cloud->points){
 //        viewer->addSphere(point,.5,std::to_string(point.x));
