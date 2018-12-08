@@ -29,7 +29,7 @@ global::CloudI::Ptr g_to_pc(global::graph_t& g_)
 };
 class Graph {
 public:
-    Graph(global::CloudI::Ptr cloud) : voxel_size(0),overlap(9.e+2),
+    Graph(global::CloudI::Ptr cloud) : voxel_size(0),overlap(1.01),
                                                 tree_(new pcl::search::KdTree<global::PointI>),
                                                 octree_(nullptr)
     {
@@ -38,8 +38,8 @@ public:
         initialize();
     };
     Graph(global::CloudI::Ptr cloud, double ovrlp) : voxel_size(0),
-                                                              tree_(new pcl::search::KdTree<global::PointI>),
-                                                              octree_(nullptr)
+                                                    tree_(new pcl::search::KdTree<global::PointI>),
+                                                    octree_(nullptr)
     {
         overlap = ovrlp;
         cloud_ = cloud;
@@ -171,6 +171,10 @@ public:
         }
         return out;
     }
+    global::CloudI::Ptr getCloud()
+    {
+        return g_to_pc(g_);
+    }
     void smooth_by_mean()
     {
 #pragma omp parallel
@@ -239,13 +243,20 @@ protected:
         tree->nearestKSearch(p,1, nn_i, nn_d);
         return nn_i[0];
     }
-    void optimizeGraph()
-    {
+    void optimizeGraph() {
         const auto vd_v = vertices(g_);
-        for(auto v = vd_v.first; v != vd_v.second; ++v)
+#pragma omp parallel
         {
-            auto nn_i = find_p(tree_,g_[*v]);
-            g_[*v].intensity = cloud_->points[nn_i].intensity;
+#pragma omp single
+            {
+                for (auto v = vd_v.first; v != vd_v.second; ++v) {
+#pragma omp task
+                    {
+                        auto nn_i = find_p(tree_, g_[*v]);
+                        g_[*v].intensity = cloud_->points[nn_i].intensity;
+                    }
+                }
+            }
         }
     }
 private:

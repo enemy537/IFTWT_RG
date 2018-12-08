@@ -121,9 +121,17 @@ private:
 
     void find_and_swap(global::pcd_vx_descriptor old_,  global::pcd_vx_descriptor new_)
     {
-        for(auto it = root_mst.begin();it != root_mst.end();it++)
-            if(it->second == old_)
-                root_mst[it->first] = new_;
+#pragma omp parallel
+        {
+#pragma omp single
+            {
+                for (auto it = root_mst.begin(); it != root_mst.end(); it++) {
+#pragma omp task
+                    if (it->second == old_)
+                        root_mst[it->first] = new_;
+                }
+            }
+        }
     }
 
     void compute_watershed()
