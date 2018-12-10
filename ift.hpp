@@ -28,11 +28,11 @@ static bool p_equal (const global::PointI& pi, const global::Point& p){
 
 class IFT_PCD{
 public:
-    IFT_PCD(global::graph_t& g_t, global::Cloud::Ptr seeds){
-        this->g_t = g_t;
+    IFT_PCD(Graph& g, global::Cloud::Ptr seeds){
+        this->g_t = g.getAdjacencyList();
         this->seeds = seeds;
         copy_graph();
-        add_seeds();
+        add_seeds(g);
         compute_watershed();
     }
     std::map<std::pair<global::pcd_vx_descriptor, global::pcd_vx_descriptor>, double> getMST()  {
@@ -99,23 +99,36 @@ private:
             boost::add_edge(map[boost::source(e,g_t)],map[boost::target(e,g_t)],g_v);
         }
     }
-    void add_seeds()
+    global::pcd_vx_descriptor search_p (global::PointI p){
+
+        auto vd = boost::vertices(g_v);
+        for(auto v=vd.first; v!=vd.second; ++v)
+            if(global::p_equal(p,g_v[*v].point))
+                return *v;
+    }
+    void add_seeds(Graph& g)
     {
-        global::graph_v g_in = g_v;
-        BGL_FORALL_VERTICES(v,g_v,global::graph_v)
+        global::CloudI::Ptr search_cloud = g.getCloud();
+        pcl::search::KdTree<global::PointI>::Ptr search_tree (new pcl::search::KdTree<global::PointI>);
+        search_tree->setInputCloud(search_cloud);
+
+        auto p2pi = [](const global::Point p){
+            global::PointI out;
+            out.x = p.x; out.y = p.y; out.z = p.z;
+            return out;
+        };
+
+        for(auto it = seeds->points.begin(); it != seeds->points.end(); it++)
         {
-            for(auto it = seeds->points.begin(); it != seeds->points.end(); it++)
-            {
-                bool pmin = p_equal(g_in[v].point,*it);
-                if(pmin)
-                {
-                    g_in[v].cost = MIN_COST;
-                    /** MST */
-                    double seed_i = g_in[v].point.intensity;
-                    r_info_m[v] = r_info{seed_i,1};
-                    break;
-                }
-            }
+            std::vector<int> nn_i (1);
+            std::vector<float> nn_d (1);
+            search_tree->nearestKSearch(p2pi(*it),1,nn_i,nn_d);
+
+            global::pcd_vx_descriptor v = search_p(search_cloud->points[nn_i[0]]);
+            g_v[v].cost = MIN_COST;
+            /** MST */
+            double seed_i = g_v[v].point.intensity;
+            r_info_m[v] = r_info{seed_i,1};
         }
     }
 
@@ -136,6 +149,8 @@ private:
 
     void compute_watershed()
     {
+        std::time_t tstart, tend;
+        tstart = std::time(0);
         /**
          * Trivial initialization
          */
@@ -210,6 +225,8 @@ private:
                 }
             }
         }
+        tend = std::time(0);
+        std::cout << "IFT took "<< std::difftime(tend, tstart) <<" second(s)."<< std::endl;
     }
 
     global::graph_v g_v;

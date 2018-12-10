@@ -29,6 +29,7 @@ public:
         this->g_v = g_v;
         this->root_m = root_m;
         create_TLC(mst);
+        std::cout << "TLC = " << TLC.size() << std::endl;
         compute_distance_map();
         single_linking(num_regions);
     }
@@ -47,41 +48,31 @@ public:
         };
 
         for(auto& it : regions) colors[it] = random();
-#pragma omp parallel
-        {
-#pragma omp single
-            {
-                for(auto it : root_m){
-#pragma omp task
-                    {
-                        global::PointT point;
-                        point.x = g_v[it.first].point.x;
-                        point.y = g_v[it.first].point.y;
-                        point.z = g_v[it.first].point.z;
-                        std::set<int> key;
-                        int tlc_idx;
+        for(auto it : root_m){
+            global::PointT point;
+            point.x = g_v[it.first].point.x;
+            point.y = g_v[it.first].point.y;
+            point.z = g_v[it.first].point.z;
+            std::set<int> key;
+            int tlc_idx;
 
-                        int r = root_translator[it.second];
-                        for(int i = 0; i < TLC.size(); i++){
-                            if(r == TLC[i].region_1 || r == TLC[i].region_2){
-                                tlc_idx = i; break;
-                            }
-                        }
-                        for(auto& c : regions){
-                            if(c.find(tlc_idx)!=c.end()){
-                                key = c;
-                                break;
-                            }
-                        }
-                        std::vector<int> color = colors[key];
-                        point.r = color[0]; point.g = color[1];point.b = color[2];
-
-                        out->points.emplace_back(point);
-                    }
+            int r = root_translator[it.second];
+            for(int i = 0; i < TLC.size(); i++){
+                if(r == TLC[i].region_1 || r == TLC[i].region_2){
+                    tlc_idx = i; break;
                 }
             }
-        }
+            for(auto& c : regions){
+                if(c.find(tlc_idx)!=c.end()){
+                    key = c;
+                    break;
+                }
+            }
+            std::vector<int> color = colors[key];
+            point.r = color[0]; point.g = color[1];point.b = color[2];
 
+            out->points.emplace_back(point);
+        }
         return out;
     }
 private:
@@ -189,8 +180,7 @@ private:
                         else
                             update_key(*it_2,*it_1,key);
 
-                        keys.erase(it_2); keys.erase(it_1);
-                        it_1 = keys.begin(); it_2 = keys.begin();
+                        it_1 = keys.erase(it_1); it_2 = keys.erase(it_2);
                         deleted = true;
                         break;
                     }else it_2++;
@@ -222,6 +212,7 @@ private:
                 regions.emplace_back(r3);
             }
         }
+        std::cout << "single link finished" << std::endl;
     }
 
     std::map<std::set<int>, double> distance_map;
