@@ -98,6 +98,7 @@ private:
         {
             boost::add_edge(map[boost::source(e,g_t)],map[boost::target(e,g_t)],g_v);
         }
+        g_t.clear();
     }
     global::pcd_vx_descriptor search_p (global::PointI p){
 

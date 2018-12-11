@@ -38,6 +38,9 @@ public:
     {
         global::CloudT::Ptr out (new global::CloudT());
 
+        std::cout << "regions: " << regions.size() << std::endl;
+        std::cout << "root_m: " << root_m.size() << std::endl;
+
         std::map<std::set<int>, std::vector<int>> colors;
         auto random = [] {
             std::vector<int> colors;
@@ -62,6 +65,7 @@ public:
                     tlc_idx = i; break;
                 }
             }
+
             for(auto& c : regions){
                 if(c.find(tlc_idx)!=c.end()){
                     key = c;
@@ -157,7 +161,7 @@ private:
     }
 
     void single_linking(int num_regions){
-        for(int i = 0; i < TLC.size() - num_regions; i++)
+        for(int i = 0; i < (TLC.size() - num_regions); i++)
         {
             std::set<int> key = closest();
             std::vector<std::set<int>> keys;
@@ -180,7 +184,8 @@ private:
                         else
                             update_key(*it_2,*it_1,key);
 
-                        it_1 = keys.erase(it_1); it_2 = keys.erase(it_2);
+                        keys.erase(it_2); keys.erase(it_1);
+                        it_1 = keys.begin(); it_2 = keys.begin();
                         deleted = true;
                         break;
                     }else it_2++;
