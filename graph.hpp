@@ -123,6 +123,7 @@ public:
         viewer->setBackgroundColor (0, 0, 0);
         viewer->setPointCloudRenderingProperties(
                 pcl::visualization::PCL_VISUALIZER_POINT_SIZE,3,"color_cloud");
+        viewer->setCameraPosition(0,0,0,1,0,1);
         return viewer;
     };
     global::CloudI::Ptr morph_bin_erode(global::CloudI::Ptr out)
@@ -202,6 +203,24 @@ public:
         global::CloudI::Ptr out = morph_gradient();
         g_ = pc_to_g(out);
         return morph_erode(out);
+    }
+    std::vector<global::pcd_vx_descriptor> getRegmin()
+    {
+        std::vector<global::pcd_vx_descriptor> min;
+        for (auto v : boost::make_iterator_range(boost::vertices(g_))) {
+            float v_val = g_[v].intensity;
+            if (v_val == 0)
+                min.emplace_back(v);
+            else {
+                auto v_adj = boost::adjacent_vertices(v, g_);
+                std::vector<float> val_adj;
+                for (auto adj = v_adj.first; adj != v_adj.second; ++adj)
+                    val_adj.emplace_back(g_[*adj].intensity);
+                if (v_val == *std::min_element(val_adj.begin(),val_adj.end()))
+                    min.emplace_back(v);
+            }
+        }
+        return min;
     }
 protected:
     double
