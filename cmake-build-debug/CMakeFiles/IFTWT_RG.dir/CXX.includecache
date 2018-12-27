@@ -6,19 +6,11 @@
 
 #IncludeRegexTransform: 
 
-../boost_helper/exercices_toolbox.h
-boost/graph/graph_traits.hpp
--
-boost/graph/adjacency_list.hpp
--
-boost/graph/graphviz.hpp
--
-fstream
+../cluster_helper/cluster.h
+windows.h
 -
 
-/home/pedro/CLionProjects/IFTWT_RG/cluster.hpp
-
-/home/pedro/CLionProjects/IFTWT_RG/flat_point.hpp
+/home/eloisa/CLionProjects/IFTWT_RG/flat_point.hpp
 pcl/segmentation/region_growing.h
 -
 pcl/filters/passthrough.h
@@ -28,7 +20,7 @@ pcl/filters/extract_indices.h
 pcl/common/centroid.h
 -
 
-/home/pedro/CLionProjects/IFTWT_RG/globals.hpp
+/home/eloisa/CLionProjects/IFTWT_RG/globals.hpp
 boost/graph/adjacency_list.hpp
 -
 boost/graph/adjacency_list.hpp
@@ -51,6 +43,8 @@ pcl/io/ply_io.h
 -
 pcl/io/pcd_io.h
 -
+ctime
+-
 math.h
 -
 set
@@ -66,7 +60,7 @@ vector
 queue
 -
 
-/home/pedro/CLionProjects/IFTWT_RG/graph.hpp
+/home/eloisa/CLionProjects/IFTWT_RG/graph.hpp
 pcl/octree/octree_pointcloud_adjacency.h
 -
 pcl/search/kdtree.h
@@ -80,18 +74,18 @@ vtkCubeSource.h
 vtkCleanPolyData.h
 -
 
-/home/pedro/CLionProjects/IFTWT_RG/ift.hpp
+/home/eloisa/CLionProjects/IFTWT_RG/hcluster.hpp
 
-/home/pedro/CLionProjects/IFTWT_RG/main.cpp
+/home/eloisa/CLionProjects/IFTWT_RG/ift.hpp
+
+/home/eloisa/CLionProjects/IFTWT_RG/main.cpp
 globals.hpp
-/home/pedro/CLionProjects/IFTWT_RG/globals.hpp
+/home/eloisa/CLionProjects/IFTWT_RG/globals.hpp
 pcl/visualization/cloud_viewer.h
 -
 pcl/octree/octree_pointcloud_adjacency.h
 -
 pcl/features/normal_3d_omp.h
--
-exercices_toolbox.h
 -
 opencv2/opencv.hpp
 -
@@ -102,13 +96,17 @@ pcl/kdtree/kdtree_flann.h
 opencv2/imgproc/types_c.h
 -
 graph.hpp
-/home/pedro/CLionProjects/IFTWT_RG/graph.hpp
+/home/eloisa/CLionProjects/IFTWT_RG/graph.hpp
 flat_point.hpp
-/home/pedro/CLionProjects/IFTWT_RG/flat_point.hpp
+/home/eloisa/CLionProjects/IFTWT_RG/flat_point.hpp
 ift.hpp
-/home/pedro/CLionProjects/IFTWT_RG/ift.hpp
-cluster.hpp
-/home/pedro/CLionProjects/IFTWT_RG/cluster.hpp
+/home/eloisa/CLionProjects/IFTWT_RG/ift.hpp
+cstdlib
+-
+cluster.h
+/home/eloisa/CLionProjects/IFTWT_RG/cluster.h
+hcluster.hpp
+/home/eloisa/CLionProjects/IFTWT_RG/hcluster.hpp
 
 /usr/include/eigen3/Eigen/Cholesky
 Core

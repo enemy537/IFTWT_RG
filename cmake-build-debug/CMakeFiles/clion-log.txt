@@ -1,4 +1,4 @@
-/opt/clion-2018.2.6/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/pedro/CLionProjects/IFTWT_RG
+/opt/clion-2018.3.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/eloisa/CLionProjects/IFTWT_RG
 -- Boost version: 1.65.1
 -- Found the following Boost libraries:
 --   system
@@ -36,6 +36,7 @@ but this file does not exist.  Possible reasons include:
    "/usr/lib/cmake/vtk-6.3/VTKTargets.cmake"
 but not all the files it references.
 
+-- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) 
 ** WARNING ** io features related to libusb-1.0 will be disabled
 -- Could NOT find ensenso (missing: ENSENSO_LIBRARY ENSENSO_INCLUDE_DIR) 
 ** WARNING ** visualization features related to ensenso will be disabled
@@ -70,6 +71,21 @@ but not all the files it references.
 -- looking for PCL_POINT_CLOUD_EDITOR
 -- looking for PCL_OUTOFCORE
 -- looking for PCL_PEOPLE
+-- Boost version: 1.65.1
+-- Found the following Boost libraries:
+--   unit_test_framework
 -- Configuring done
--- Generating done
--- Build files have been written to: /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug
+CMake Error at cluster_helper/CMakeLists.txt:7 (add_library):
+  Cannot find source file:
+
+    cluster_helper/cluster.h
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm
+  .hpp .hxx .in .txx
+
+
+CMake Error at cluster_helper/CMakeLists.txt:7 (add_library):
+  No SOURCES given to target: cluster_helper
+
+
+-- Build files have been written to: /home/eloisa/CLionProjects/IFTWT_RG/cmake-build-debug

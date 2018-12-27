@@ -28,7 +28,7 @@ include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
-include_directories(boost_helper)
+add_subdirectory(cluster_helper)
 
-add_executable(IFTWT_RG globals.hpp main.cpp flat_point.hpp graph.hpp ift.hpp cluster.hpp )
-target_link_libraries (IFTWT_RG ${PCL_LIBRARIES} ${VTK_LIBRARIES} ${OpenCV_LIBS})
+add_executable(IFTWT_RG globals.hpp main.cpp flat_point.hpp graph.hpp ift.hpp hcluster.hpp)
+target_link_libraries (IFTWT_RG ${PCL_LIBRARIES} ${VTK_LIBRARIES} ${OpenCV_LIBS} cluster_helper)

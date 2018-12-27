@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/pedro/CLionProjects/IFTWT_RG/main.cpp" "/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/IFTWT_RG.dir/main.cpp.o"
+  "/home/eloisa/CLionProjects/IFTWT_RG/main.cpp" "/home/eloisa/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/IFTWT_RG.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -53,7 +53,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/eigen3"
   "/usr/include/ni"
   "/usr/include/openni2"
-  "../boost_helper"
+  "../cluster_helper"
   "/usr/include/x86_64-linux-gnu/qt5"
   "/usr/include/x86_64-linux-gnu/qt5/QtWidgets"
   "/usr/include/x86_64-linux-gnu/qt5/QtGui"
@@ -64,6 +64,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/eloisa/CLionProjects/IFTWT_RG/cmake-build-debug/cluster_helper/CMakeFiles/cluster_helper.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

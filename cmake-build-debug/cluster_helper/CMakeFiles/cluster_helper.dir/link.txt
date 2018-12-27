@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcluster_helper.a  CMakeFiles/cluster_helper.dir/cluster.c.o CMakeFiles/cluster_helper.dir/data.c.o
+/usr/bin/ranlib libcluster_helper.a

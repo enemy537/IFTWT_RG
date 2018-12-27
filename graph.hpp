@@ -119,7 +119,7 @@ public:
 
         viewer->getRenderWindow()->GetRenderers()->GetFirstRenderer()->AddActor(multiActor);
 
-        viewer->addPointCloud<global::PointI>(cloud_, "color_cloud");
+        viewer->addPointCloud<global::PointI>(g_to_pc(g_), "color_cloud");
         viewer->setBackgroundColor (0, 0, 0);
         viewer->setPointCloudRenderingProperties(
                 pcl::visualization::PCL_VISUALIZER_POINT_SIZE,3,"color_cloud");
@@ -204,23 +204,35 @@ public:
         g_ = pc_to_g(out);
         return morph_erode(out);
     }
-    std::vector<global::pcd_vx_descriptor> getRegmin()
+    global::Cloud::Ptr getRegmin()
     {
-        std::vector<global::pcd_vx_descriptor> min;
-        for (auto v : boost::make_iterator_range(boost::vertices(g_))) {
-            float v_val = g_[v].intensity;
-            if (v_val == 0)
-                min.emplace_back(v);
-            else {
-                auto v_adj = boost::adjacent_vertices(v, g_);
-                std::vector<float> val_adj;
-                for (auto adj = v_adj.first; adj != v_adj.second; ++adj)
-                    val_adj.emplace_back(g_[*adj].intensity);
-                if (v_val == *std::min_element(val_adj.begin(),val_adj.end()))
-                    min.emplace_back(v);
+        global::Cloud::Ptr out(new global::Cloud);
+#pragma omp parallel
+        {
+#pragma omp single
+            {
+                for (auto v : boost::make_iterator_range(boost::vertices(g_))) {
+#pragma omp task shared(out)
+                    {
+                        float v_val = g_[v].intensity;
+                        if (v_val == 0)
+#pragma omp critical
+                            out->push_back(global::pi2p(g_[v]));
+                        else {
+                            auto v_adj = boost::adjacent_vertices(v, g_);
+                            std::vector<float> val_adj;
+                            for (auto adj = v_adj.first; adj != v_adj.second; ++adj)
+                                val_adj.emplace_back(g_[*adj].intensity);
+                            if (v_val <= *std::min_element(val_adj.begin(), val_adj.end()))
+#pragma omp critical
+                                out->push_back(global::pi2p(g_[v]));
+                        }
+                    }
+                }
             }
         }
-        return min;
+
+        return out;
     }
 protected:
     double

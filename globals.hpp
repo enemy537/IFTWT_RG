@@ -82,6 +82,20 @@ namespace global{
     static bool p_equal (const global::PointI p1, const global::PointI p2){
         return p1.x == p2.x && p1.y == p2.y && p1.z == p2.z;
     };
+    static global::PointI p2pi (const global::Point p) {
+        global::PointI out;
+        out.x = p.x;
+        out.y = p.y;
+        out.z = p.z;
+        return out;
+    };
+    static global::Point pi2p (const global::PointI p) {
+        global::Point out;
+        out.x = p.x;
+        out.y = p.y;
+        out.z = p.z;
+        return out;
+    };
 }
 
 #endif //IFTWT_RG_GLOBALS_H

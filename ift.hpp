@@ -32,14 +32,14 @@ public:
         this->g_t = g.getAdjacencyList();
         this->seeds = seeds;
         copy_graph();
-        add_seeds(g,false);
+        add_seeds(g);
         compute_watershed();
     }
     IFT_PCD(Graph& g){
         this->g_t = g.getAdjacencyList();
-        this->seeds = seeds;
+        this->seeds = g.getRegmin();
         copy_graph();
-        add_seeds(g,true);
+        add_seeds(g);
         compute_watershed();
     }
     std::map<std::pair<global::pcd_vx_descriptor, global::pcd_vx_descriptor>, double> getMST()  {
@@ -114,42 +114,25 @@ private:
             if(global::p_equal(p,g_v[*v].point))
                 return *v;
     }
-    void add_seeds(Graph& g, bool regmin)
+    void add_seeds(Graph& g)
     {
-        if(!regmin) {
-            global::CloudI::Ptr search_cloud = g.getCloud();
-            pcl::search::KdTree<global::PointI>::Ptr search_tree(new pcl::search::KdTree<global::PointI>);
-            search_tree->setInputCloud(search_cloud);
+        global::CloudI::Ptr search_cloud = g.getCloud();
+        pcl::search::KdTree<global::PointI>::Ptr search_tree(new pcl::search::KdTree<global::PointI>);
+        search_tree->setInputCloud(search_cloud);
 
-            auto p2pi = [](const global::Point p) {
-                global::PointI out;
-                out.x = p.x;
-                out.y = p.y;
-                out.z = p.z;
-                return out;
-            };
+        for (auto it = seeds->points.begin(); it != seeds->points.end(); it++) {
+            std::vector<int> nn_i(1);
+            std::vector<float> nn_d(1);
+            search_tree->nearestKSearch(global::p2pi(*it), 1, nn_i, nn_d);
 
-            for (auto it = seeds->points.begin(); it != seeds->points.end(); it++) {
-                std::vector<int> nn_i(1);
-                std::vector<float> nn_d(1);
-                search_tree->nearestKSearch(p2pi(*it), 1, nn_i, nn_d);
-
-                global::pcd_vx_descriptor v = search_p(search_cloud->points[nn_i[0]]);
-                g_v[v].cost = MIN_COST;
-                /** MST */
-                double seed_i = g_v[v].point.intensity;
-                r_info_m[v] = r_info{seed_i, 1};
-            }
-        }else{
-            std::vector<global::pcd_vx_descriptor> mmregmin = g.getRegmin();
-                for (auto it : mmregmin) {
-                    g_v[it].cost = MIN_COST;
-                    /** MST */
-                    double seed_i = g_v[it].point.intensity;
-                    r_info_m[it] = r_info{seed_i, 1};
-                }
-            }
-        std::cout << r_info_m.size() << std::endl;
+            global::pcd_vx_descriptor v = search_p(search_cloud->points[nn_i[0]]);
+            g_v[v].cost = MIN_COST;
+            /** MST */
+            double seed_i = g_v[v].point.intensity;
+            r_info_m[v] = r_info{seed_i, 1};
+        }
+        std::cout << "seeds " << r_info_m.size() << std::endl;
+        seeds->clear();
     }
 
     void find_and_swap(global::pcd_vx_descriptor old_,  global::pcd_vx_descriptor new_)
@@ -181,7 +164,7 @@ private:
             if(g_v[t].cost != MAX_COST)
                 Q.push(pair(t,g_v[t].cost));
         }
-
+        std::cout << "queue "<<Q.size() << std::endl;
         /**
          * Propagation
          */

@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/eloisa/CLionProjects/IFTWT_RG/cluster_helper/cluster.c
+time.h
+-
+stdlib.h
+-
+math.h
+-
+float.h
+-
+limits.h
+-
+string.h
+-
+cluster.h
+/home/eloisa/CLionProjects/IFTWT_RG/cluster_helper/cluster.h
+windows.h
+-
+
+/home/eloisa/CLionProjects/IFTWT_RG/cluster_helper/cluster.h
+windows.h
+-
+
