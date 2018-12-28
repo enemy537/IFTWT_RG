@@ -30,7 +30,7 @@ public:
         this->root_m = root_m;
         create_TLC(mst);
         std::cout << "TLC = " << TLC.size() << std::endl;
-        single_linking(num_regions);
+        clusterize(num_regions);
     }
 
     global::CloudT::Ptr getLabelCloud()
@@ -78,6 +78,12 @@ public:
         }
         return out;
     }
+    global::CloudT::Ptr getCloudFromHash(int num_regions){
+        compute_distance_map();
+        regions.clear();
+        single_linking(num_regions);
+        return getLabelCloud();
+    }
 private:
     void create_TLC(std::map<std::pair<global::pcd_vx_descriptor,global::pcd_vx_descriptor>, double> mst){
 
@@ -109,7 +115,7 @@ private:
         }
     }
 
-    void single_linking(int num_regions){
+    void clusterize(int num_regions){
         int nrows = TLC.size(), ncols = 1;
         double** data = (double**) malloc(nrows*sizeof(double*));
         int** mask = (int**) malloc(nrows*sizeof(int*));
@@ -148,16 +154,125 @@ private:
         int* clusterid = (int*) malloc(nrows*sizeof(int));
         cuttree(nrows, tree, num_regions, clusterid);
 
-        for(int i=0; i<nrows; i++) printf("Region %2d: cluster %2d\n", i, clusterid[i]);
-
         for(int i=0; i<num_regions; i++)
             regions.emplace_back(std::set<int>());
         for(int i=0; i<nrows; i++)
             regions[clusterid[i]].insert(i);
     }
+    std::set<int> closest (){
+        std::set<int> key;
+        double value = INFINITY;
+        for(auto& i : distance_map)
+        {
+            if(i.second < value)
+            {
+                key = i.first;
+                value = i.second;
+            }
+        }
+        return key;
+    };
+    bool key_compare (std::set<int> a, std::set<int> b){
+        for(auto& a_ : a)
+            for(auto& b_ : b)
+                if(a_ == b_) return true;
+        return false;
+    };
+    bool isKeyRoot (std::set<int> a, std::set<int> b, std::set<int> key ){
+        std::set<int> root_1, root_2;
+        std::set_difference(a.begin(),a.end(), key.begin(),key.end(),
+                            std::inserter(root_1,root_1.begin()));
+        std::set_difference(b.begin(),b.end(), key.begin(),key.end(),
+                            std::inserter(root_2,root_2.begin()));
+
+        return root_1 == root_2;
+    }
+    void update_key (std::set<int> a, std::set<int> b, std::set<int> key){
+        double temp_weight = distance_map[a];
+        std::set<int> temp_key (a);
+        temp_key.insert(key.begin(),key.end());
+        distance_map[temp_key] = temp_weight;
+        distance_map.erase(b); distance_map.erase(a);
+    }
+
+    void print_key (std::set<int> key){
+        for(auto& i : key)
+            std::cout << i << " ";
+        std::cout << "| " ; std::cout << distance_map[key] << std::endl;
+    }
+
+    void compute_distance_map(){
+        for (int i = 0; i < TLC.size(); i++) {
+            for (int j = 0; j < TLC.size(); j++) {
+                if (i != j && i < j)
+                    distance_map[{i, j}] = std::sqrt(std::pow(TLC[i].weight - TLC[j].weight, 2));
+            }
+        }
+    }
+
+    void single_linking(int num_regions){
+        for(int i = 0; i < (TLC.size() - num_regions); i++)
+        {
+            std::set<int> key = closest();
+            std::vector<std::set<int>> keys;
+            for(auto& d : distance_map)
+                if(key_compare(key,d.first) && d.first != key){
+                    std::set<int> deep_copy(d.first);
+                    keys.emplace_back(deep_copy);
+                }
+
+            auto it_1 = keys.begin();
+            auto it_2 = keys.begin();
+
+            while(it_1 != keys.end()){
+                bool deleted = false;
+                while(it_2 != keys.end()){
+                    if(isKeyRoot(*it_1,*it_2,key) && *it_1 != *it_2)
+                    {
+                        if(distance_map[*it_1] < distance_map[*it_2])
+                            update_key(*it_1,*it_2,key);
+                        else
+                            update_key(*it_2,*it_1,key);
+
+                        keys.erase(it_2); keys.erase(it_1);
+                        it_1 = keys.begin(); it_2 = keys.begin();
+                        deleted = true;
+                        break;
+                    }else it_2++;
+                }
+                if(!deleted)
+                    it_1++;
+            }
+            distance_map.erase(key);
+        }
+
+        regions.emplace_back(distance_map.begin()->first);
+        for(auto& i : distance_map){
+            std::set<int> r1, r2, r3;
+            if(i.first != regions[0] && key_compare(i.first,regions[0]) && regions.size() == 1){
+                std::set_intersection(i.first.begin(), i.first.end(), regions[0].begin(), regions[0].end(),
+                                      std::inserter(r1, r1.begin()));
+                std::set_difference(regions[0].begin(), regions[0].end(),r1.begin(), r1.end(),
+                                    std::inserter(r2, r2.begin()));
+                std::set_difference(i.first.begin(), i.first.end(),r1.begin(), r1.end(),
+                                    std::inserter(r3, r3.begin()));
+                regions.emplace_back(r1);
+                regions.emplace_back(r2);
+                regions.emplace_back(r3);
+                regions.erase(regions.begin());
+            }
+            else if(key_compare(i.first,regions[0]) && regions.size() > 1){
+                std::set_difference(i.first.begin(), i.first.end(),regions[0].begin(), regions[0].end(),
+                                    std::inserter(r3, r3.begin()));
+                regions.emplace_back(r3);
+            }
+        }
+        std::cout << "single link finished" << std::endl;
+    }
 
     std::vector<mst_info> TLC;
     std::vector<std::set<int>> regions;
+    std::map<std::set<int>, double> distance_map;
     std::map<global::pcd_vx_descriptor, global::pcd_vx_descriptor> root_m;
     std::map<global::pcd_vx_descriptor, int> root_translator;
     global::graph_v g_v;

@@ -39,6 +39,11 @@ global::CloudI::Ptr cloudGray(global::CloudT::Ptr cloud)
     }
     return cloud_gray;
 }
+void
+setBackground (pcl::visualization::PCLVisualizer& viewer)
+{
+    viewer.setBackgroundColor (.0, .0, .0);
+}
 int main (int argc, char** argv) {
 
     global::CloudI::Ptr cloud_i (new global::CloudI());
@@ -53,7 +58,7 @@ int main (int argc, char** argv) {
         return (-1);
     }
 
-    Graph gg(cloud_i);
+    Graph gg(cloud_i,6);
 
     IFT_PCD ift(gg,cloud);
 
@@ -61,13 +66,37 @@ int main (int argc, char** argv) {
 
     Cluster c(ift.getMST(),ift.getRoots(),ift.getGraph(),14);
 
-    global::CloudT::Ptr colored_cloud = c.getLabelCloud();
+    global::CloudT::Ptr colored_cloud_tree = c.getLabelCloud();
+    global::CloudT::Ptr colored_cloud_hash = c.getCloudFromHash(14);
 
 //    pcl::io::savePLYFile("curia_sg_min.ply", *colored_cloud);
 
-    pcl::visualization::CloudViewer viewer("cloud");
-    viewer.showCloud(colored_cloud);
-    while (!viewer.wasStopped ()){}
+    boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer (new pcl::visualization::PCLVisualizer ("3D Viewer"));
+    viewer->initCameraParameters ();
+
+    int v1(0);
+    viewer->createViewPort (0.0, 0.0, 0.5, 1.0, v1);
+    viewer->setBackgroundColor (0, 0, 0, v1);
+    viewer->addText ("tree", 10, 10, "v1 text", v1);
+    pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb (colored_cloud_tree);
+    viewer->addPointCloud<pcl::PointXYZRGB> (colored_cloud_tree, rgb, "sample cloud1", v1);
+
+    int v2(0);
+    viewer->createViewPort (0.5, 0.0, 1.0, 1.0, v2);
+    viewer->setBackgroundColor (0.3, 0.3, 0.3, v2);
+    viewer->addText ("hash", 10, 10, "v2 text", v2);
+    pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb2 (colored_cloud_hash);
+    viewer->addPointCloud<pcl::PointXYZRGB> (colored_cloud_hash, rgb2, "sample cloud2", v2);
+
+    viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "sample cloud1");
+    viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "sample cloud2");
+    viewer->addCoordinateSystem (1.0);
+
+    while (!viewer->wasStopped ())
+    {
+        viewer->spinOnce (100);
+        boost::this_thread::sleep (boost::posix_time::microseconds (100000));
+    }
 
     return (0);
 }
