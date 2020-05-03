@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/pedro/CLionProjects/IFTWT_RG/main.cpp" "/home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/IFTWT_RG.dir/main.cpp.o"
+  "/home/pedro/ClionProjects/IFTWT_RG/main.cpp" "/home/pedro/ClionProjects/IFTWT_RG/cmake-build-debug/CMakeFiles/IFTWT_RG.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -44,7 +44,6 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/lib/x86_64-linux-gnu/openmpi/include/openmpi/opal/mca/event/libevent2022/libevent/include"
   "/usr/lib/x86_64-linux-gnu/openmpi/include"
   "/usr/include/python2.7"
-  "/usr/include/x86_64-linux-gnu"
   "/usr/include/hdf5/openmpi"
   "/usr/include/libxml2"
   "/usr/include/jsoncpp"

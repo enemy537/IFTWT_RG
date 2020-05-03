@@ -30,5 +30,5 @@ add_definitions(${PCL_DEFINITIONS})
 
 include_directories(boost_helper)
 
-add_executable(IFTWT_RG globals.hpp main.cpp flat_point.hpp graph.hpp ift.hpp cluster.hpp )
+add_executable(IFTWT_RG globals.hpp main.cpp flat_point.hpp graph.hpp ift.hpp cluster.hpp graco.hpp)
 target_link_libraries (IFTWT_RG ${PCL_LIBRARIES} ${VTK_LIBRARIES} ${OpenCV_LIBS})

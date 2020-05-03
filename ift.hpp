@@ -95,13 +95,13 @@ public:
 private:
 
     void copy_graph(){
-        std::map<global::graph_t::vertex_descriptor, global::pcd_vx_descriptor> map;
-        BGL_FORALL_VERTICES(v,g_t,global::graph_t)
+        std::map<global::graph_i::vertex_descriptor, global::pcd_vx_descriptor> map;
+        BGL_FORALL_VERTICES(v,g_t,global::graph_i)
         {
             global::pcd_vx_descriptor pcd_vx = boost::add_vertex({MAX_COST,g_t[v]},g_v);
             map[v] = pcd_vx;
         }
-        BGL_FORALL_EDGES(e,g_t,global::graph_t)
+        BGL_FORALL_EDGES(e,g_t,global::graph_i)
         {
             boost::add_edge(map[boost::source(e,g_t)],map[boost::target(e,g_t)],g_v);
         }
@@ -250,7 +250,7 @@ private:
     }
 
     global::graph_v g_v;
-    global::graph_t g_t;
+    global::graph_i g_t;
     global::Cloud::Ptr seeds;
 
     using pair = std::pair<global::pcd_vx_descriptor, unsigned int>;

@@ -16,9 +16,9 @@ boost/graph/graphviz.hpp
 fstream
 -
 
-/home/pedro/CLionProjects/IFTWT_RG/cluster.hpp
+/home/pedro/ClionProjects/IFTWT_RG/cluster.hpp
 
-/home/pedro/CLionProjects/IFTWT_RG/flat_point.hpp
+/home/pedro/ClionProjects/IFTWT_RG/flat_point.hpp
 pcl/segmentation/region_growing.h
 -
 pcl/filters/passthrough.h
@@ -28,7 +28,7 @@ pcl/filters/extract_indices.h
 pcl/common/centroid.h
 -
 
-/home/pedro/CLionProjects/IFTWT_RG/globals.hpp
+/home/pedro/ClionProjects/IFTWT_RG/globals.hpp
 boost/graph/adjacency_list.hpp
 -
 boost/graph/adjacency_list.hpp
@@ -51,6 +51,8 @@ pcl/io/ply_io.h
 -
 pcl/io/pcd_io.h
 -
+ctime
+-
 math.h
 -
 set
@@ -66,7 +68,7 @@ vector
 queue
 -
 
-/home/pedro/CLionProjects/IFTWT_RG/graph.hpp
+/home/pedro/ClionProjects/IFTWT_RG/graco.hpp
 pcl/octree/octree_pointcloud_adjacency.h
 -
 pcl/search/kdtree.h
@@ -80,11 +82,25 @@ vtkCubeSource.h
 vtkCleanPolyData.h
 -
 
-/home/pedro/CLionProjects/IFTWT_RG/ift.hpp
+/home/pedro/ClionProjects/IFTWT_RG/graph.hpp
+pcl/octree/octree_pointcloud_adjacency.h
+-
+pcl/search/kdtree.h
+-
+pcl/visualization/pcl_visualizer.h
+-
+vtkRenderWindow.h
+-
+vtkCubeSource.h
+-
+vtkCleanPolyData.h
+-
 
-/home/pedro/CLionProjects/IFTWT_RG/main.cpp
+/home/pedro/ClionProjects/IFTWT_RG/ift.hpp
+
+/home/pedro/ClionProjects/IFTWT_RG/main.cpp
 globals.hpp
-/home/pedro/CLionProjects/IFTWT_RG/globals.hpp
+/home/pedro/ClionProjects/IFTWT_RG/globals.hpp
 pcl/visualization/cloud_viewer.h
 -
 pcl/octree/octree_pointcloud_adjacency.h
@@ -102,13 +118,15 @@ pcl/kdtree/kdtree_flann.h
 opencv2/imgproc/types_c.h
 -
 graph.hpp
-/home/pedro/CLionProjects/IFTWT_RG/graph.hpp
+/home/pedro/ClionProjects/IFTWT_RG/graph.hpp
 flat_point.hpp
-/home/pedro/CLionProjects/IFTWT_RG/flat_point.hpp
+/home/pedro/ClionProjects/IFTWT_RG/flat_point.hpp
 ift.hpp
-/home/pedro/CLionProjects/IFTWT_RG/ift.hpp
+/home/pedro/ClionProjects/IFTWT_RG/ift.hpp
 cluster.hpp
-/home/pedro/CLionProjects/IFTWT_RG/cluster.hpp
+/home/pedro/ClionProjects/IFTWT_RG/cluster.hpp
+graco.hpp
+/home/pedro/ClionProjects/IFTWT_RG/graco.hpp
 
 /usr/include/eigen3/Eigen/Cholesky
 Core
@@ -1000,41 +1018,27 @@ cstdint
 
 /usr/include/eigen3/Eigen/src/Core/util/XprHelper.h
 
-/usr/include/eigen3/Eigen/src/Eigenvalues/./ComplexSchur.h
-./HessenbergDecomposition.h
-/usr/include/eigen3/Eigen/src/Eigenvalues/././HessenbergDecomposition.h
-
-/usr/include/eigen3/Eigen/src/Eigenvalues/./HessenbergDecomposition.h
-
-/usr/include/eigen3/Eigen/src/Eigenvalues/./RealQZ.h
-
-/usr/include/eigen3/Eigen/src/Eigenvalues/./RealSchur.h
-./HessenbergDecomposition.h
-/usr/include/eigen3/Eigen/src/Eigenvalues/././HessenbergDecomposition.h
-
-/usr/include/eigen3/Eigen/src/Eigenvalues/./Tridiagonalization.h
-
 /usr/include/eigen3/Eigen/src/Eigenvalues/ComplexEigenSolver.h
 ./ComplexSchur.h
-/usr/include/eigen3/Eigen/src/Eigenvalues/./ComplexSchur.h
+/usr/include/eigen3/Eigen/src/Eigenvalues/ComplexSchur.h
 
 /usr/include/eigen3/Eigen/src/Eigenvalues/ComplexSchur.h
 ./HessenbergDecomposition.h
-/usr/include/eigen3/Eigen/src/Eigenvalues/./HessenbergDecomposition.h
+/usr/include/eigen3/Eigen/src/Eigenvalues/HessenbergDecomposition.h
 
 /usr/include/eigen3/Eigen/src/Eigenvalues/ComplexSchur_LAPACKE.h
 
 /usr/include/eigen3/Eigen/src/Eigenvalues/EigenSolver.h
 ./RealSchur.h
-/usr/include/eigen3/Eigen/src/Eigenvalues/./RealSchur.h
+/usr/include/eigen3/Eigen/src/Eigenvalues/RealSchur.h
 
 /usr/include/eigen3/Eigen/src/Eigenvalues/GeneralizedEigenSolver.h
 ./RealQZ.h
-/usr/include/eigen3/Eigen/src/Eigenvalues/./RealQZ.h
+/usr/include/eigen3/Eigen/src/Eigenvalues/RealQZ.h
 
 /usr/include/eigen3/Eigen/src/Eigenvalues/GeneralizedSelfAdjointEigenSolver.h
 ./Tridiagonalization.h
-/usr/include/eigen3/Eigen/src/Eigenvalues/./Tridiagonalization.h
+/usr/include/eigen3/Eigen/src/Eigenvalues/Tridiagonalization.h
 
 /usr/include/eigen3/Eigen/src/Eigenvalues/HessenbergDecomposition.h
 
@@ -1044,13 +1048,13 @@ cstdint
 
 /usr/include/eigen3/Eigen/src/Eigenvalues/RealSchur.h
 ./HessenbergDecomposition.h
-/usr/include/eigen3/Eigen/src/Eigenvalues/./HessenbergDecomposition.h
+/usr/include/eigen3/Eigen/src/Eigenvalues/HessenbergDecomposition.h
 
 /usr/include/eigen3/Eigen/src/Eigenvalues/RealSchur_LAPACKE.h
 
 /usr/include/eigen3/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h
 ./Tridiagonalization.h
-/usr/include/eigen3/Eigen/src/Eigenvalues/./Tridiagonalization.h
+/usr/include/eigen3/Eigen/src/Eigenvalues/Tridiagonalization.h
 
 /usr/include/eigen3/Eigen/src/Eigenvalues/SelfAdjointEigenSolver_LAPACKE.h
 
@@ -3501,36 +3505,4 @@ vtkCommonCoreModule.h
 /usr/include/vtk-6.3/vtkCommonCoreModule.h
 vtkObject.h
 /usr/include/vtk-6.3/vtkObject.h
-
-/usr/include/x86_64-linux-gnu/bits/mman-linux.h
-bits/mman-shared.h
--
-
-/usr/include/x86_64-linux-gnu/bits/mman-shared.h
-
-/usr/include/x86_64-linux-gnu/bits/mman.h
-bits/mman-linux.h
--
-
-/usr/include/x86_64-linux-gnu/bits/types.h
-features.h
--
-bits/wordsize.h
--
-bits/typesizes.h
--
-
-/usr/include/x86_64-linux-gnu/bits/typesizes.h
-
-/usr/include/x86_64-linux-gnu/bits/wordsize.h
-
-/usr/include/x86_64-linux-gnu/sys/mman.h
-features.h
--
-bits/types.h
--
-stddef.h
--
-bits/mman.h
--
 

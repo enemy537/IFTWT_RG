@@ -1,15 +1,4 @@
-/opt/clion-2018.2.6/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/pedro/CLionProjects/IFTWT_RG
--- Boost version: 1.65.1
--- Found the following Boost libraries:
---   system
---   filesystem
---   thread
---   date_time
---   iostreams
---   serialization
---   chrono
---   atomic
---   regex
+/opt/clion-2020.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/pedro/ClionProjects/IFTWT_RG
 -- Could NOT find ensenso (missing: ENSENSO_LIBRARY ENSENSO_INCLUDE_DIR) 
 ** WARNING ** io features related to ensenso will be disabled
 -- Could NOT find DAVIDSDK (missing: DAVIDSDK_LIBRARY DAVIDSDK_INCLUDE_DIR) 
@@ -36,6 +25,7 @@ but this file does not exist.  Possible reasons include:
    "/usr/lib/cmake/vtk-6.3/VTKTargets.cmake"
 but not all the files it references.
 
+-- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) 
 ** WARNING ** io features related to libusb-1.0 will be disabled
 -- Could NOT find ensenso (missing: ENSENSO_LIBRARY ENSENSO_INCLUDE_DIR) 
 ** WARNING ** visualization features related to ensenso will be disabled
@@ -72,4 +62,4 @@ but not all the files it references.
 -- looking for PCL_PEOPLE
 -- Configuring done
 -- Generating done
--- Build files have been written to: /home/pedro/CLionProjects/IFTWT_RG/cmake-build-debug
+-- Build files have been written to: /home/pedro/ClionProjects/IFTWT_RG/cmake-build-debug

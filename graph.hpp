@@ -1,3 +1,5 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "openmp-use-default-none"
 //
 // Created by avell on 07/05/18.
 //
@@ -10,7 +12,7 @@
 
 enum class MORPH : char {bin_erode = 1,bin_dilate = 2,dilate = 3,erode = 4};
 
-global::CloudI::Ptr g_to_pc(global::graph_t& g_)
+global::CloudI::Ptr g_to_pc(global::graph_i& g_)
 {
     auto deep_copy = [](const global::PointI& p1){
         global::PointI p (p1.intensity);
@@ -19,7 +21,7 @@ global::CloudI::Ptr g_to_pc(global::graph_t& g_)
     };
 
     global::CloudI::Ptr out (new global::CloudI());
-    using vd = typename global::graph_t::vertex_descriptor;
+    using vd = typename global::graph_i::vertex_descriptor;
     const auto vd_v = vertices(g_);
     for (auto v = vd_v.first; v != vd_v.second; ++v) {
 
@@ -58,7 +60,7 @@ public:
         this->overlap = overlap;
         initialize();
     }
-    global::graph_t getAdjacencyList()
+    global::graph_i getAdjacencyList()
     {
         return g_;
     };
@@ -159,13 +161,13 @@ public:
         }
         return cloud_g;
     }
-    global::graph_t pc_to_g(global::CloudI::Ptr cloud)
+    global::graph_i pc_to_g(global::CloudI::Ptr cloud)
     {
         pcl::search::KdTree<global::PointI>::Ptr tree (new pcl::search::KdTree<global::PointI>);
-        global::graph_t out = copy_g();
+        global::graph_i out = copy_g();
         tree->setInputCloud(cloud);
 
-        BGL_FORALL_VERTICES(v,out,global::graph_t)
+        BGL_FORALL_VERTICES(v,out,global::graph_i)
         {
             int id_out = find_p(tree,g_[v]);
             out[v].intensity = cloud->points[id_out].intensity;
@@ -182,7 +184,7 @@ public:
         {
 #pragma omp single
             {
-                BGL_FORALL_VERTICES(v, g_, global::graph_t)
+                BGL_FORALL_VERTICES(v, g_, global::graph_i)
                 {
 #pragma omp task
                     {
@@ -262,6 +264,8 @@ protected:
         tree->nearestKSearch(p,1, nn_i, nn_d);
         return nn_i[0];
     }
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "openmp-use-default-none"
     void optimizeGraph() {
         const auto vd_v = vertices(g_);
 #pragma omp parallel
@@ -278,11 +282,12 @@ protected:
             }
         }
     }
+#pragma clang diagnostic pop
 private:
     pcl::PointCloud<global::PointI>::Ptr cloud_;
     pcl::search::KdTree<global::PointI>::Ptr tree_;
     double voxel_size, overlap;
-    global::graph_t g_;
+    global::graph_i g_;
     pcl::octree::OctreePointCloudAdjacency<global::PointI>::Ptr octree_;
 
     void initialize()
@@ -301,64 +306,68 @@ private:
         optimizeGraph();
         cloud_.reset();
     };
-    global::graph_t copy_g()
+    global::graph_i copy_g()
     {
-        std::map<global::graph_t::vertex_descriptor, int> index;
+        std::map<global::graph_i::vertex_descriptor, int> index;
         for (auto v : boost::make_iterator_range(boost::vertices(g_))) {
             index.insert(std::make_pair(v, index.size()));
         }
-        global::graph_t g_out;
+        global::graph_i g_out;
         boost::copy_graph(g_,g_out,
                           boost::vertex_index_map(boost::make_assoc_property_map(index)));
         return g_out;
     }
-    global::CloudI::Ptr morph_base(MORPH type, global::CloudI::Ptr& out){
-        global::graph_t g_in = g_;
-        out->swap(*g_to_pc(g_));
-        pcl::search::KdTree<global::PointI>::Ptr tree (new pcl::search::KdTree<global::PointI>);
-        tree->setInputCloud(out);
-        const auto vd_g = vertices(g_in);
+    global::CloudI::Ptr morph_base(MORPH type, global::CloudI::Ptr& out);
+};
+
+global::CloudI::Ptr Graph::morph_base(MORPH type, pcl::PointCloud<global::PointI>::Ptr &out) {
+    global::graph_i g_in = g_;
+    out->swap(*g_to_pc(g_));
+    pcl::search::KdTree<global::PointI>::Ptr tree (new pcl::search::KdTree<global::PointI>);
+    tree->setInputCloud(out);
+    const auto vd_g = vertices(g_in);
 #pragma omp parallel
-        {
+    {
 #pragma omp single
-            {
-                for (auto v = vd_g.first; v != vd_g.second; ++v) {
+        {
+            for (auto v = vd_g.first; v != vd_g.second; ++v) {
 #pragma omp task shared(out)
-                    {
-                        const auto adj_v = boost::adjacent_vertices(*v, g_in);
-                        using vd = typename global::graph_t::vertex_descriptor;
-                        float intensity = 0;
+                {
+                    const auto adj_v = boost::adjacent_vertices(*v, g_in);
+                    using vd = typename global::graph_i::vertex_descriptor;
+                    float intensity = 0;
 
-                        if(type == MORPH::bin_erode){
-                            bool erodible = std::find_if(adj_v.first, adj_v.second,
-                                                         [&g_in](const vd &d) { return g_in[d].intensity == 0; }
-                            ) != adj_v.second;
-                            intensity = erodible ? 0.f : 255.f;
-                        }else if(type == MORPH::bin_dilate){
-                            bool dilatable = std::find_if(adj_v.first, adj_v.second,
-                                                          [&g_in](const vd &d) { return g_in[d].intensity == 255;}
-                            ) != adj_v.second;
-                            float intensity = dilatable ? 255.f:0.f;
-                        }else if(type == MORPH::erode){
-                            intensity = 255;
-                            for(auto i = adj_v.first; i!=adj_v.second; i++){
-                                float temp_i = g_in[*i].intensity;
-                                if(temp_i < intensity) intensity = temp_i ;
-                            }
-                        }else if(type == MORPH::dilate){
-                            intensity = 0;
-                            for(auto i = adj_v.first; i!=adj_v.second; i++){
-                                float temp_i = g_in[*i].intensity;
-                                if(temp_i > intensity) intensity = temp_i ;
-                            }
+                    if(type == MORPH::bin_erode){
+                        bool erodible = std::find_if(adj_v.first, adj_v.second,
+                                                     [&g_in](const vd &d) { return g_in[d].intensity == 0; }
+                        ) != adj_v.second;
+                        intensity = erodible ? 0.f : 255.f;
+                    }else if(type == MORPH::bin_dilate){
+                        bool dilatable = std::find_if(adj_v.first, adj_v.second,
+                                                      [&g_in](const vd &d) { return g_in[d].intensity == 255;}
+                        ) != adj_v.second;
+                        float intensity = dilatable ? 255.f:0.f;
+                    }else if(type == MORPH::erode){
+                        intensity = 255;
+                        for(auto i = adj_v.first; i!=adj_v.second; i++){
+                            float temp_i = g_in[*i].intensity;
+                            if(temp_i < intensity) intensity = temp_i ;
                         }
-
-                        int id_out = find_p(tree,g_in[*v]);
-                        out->points[id_out].intensity = intensity;
+                    }else if(type == MORPH::dilate){
+                        intensity = 0;
+                        for(auto i = adj_v.first; i!=adj_v.second; i++){
+                            float temp_i = g_in[*i].intensity;
+                            if(temp_i > intensity) intensity = temp_i ;
+                        }
                     }
+
+                    int id_out = find_p(tree,g_in[*v]);
+                    out->points[id_out].intensity = intensity;
                 }
             }
         }
-        return out;
     }
-};
+    return out;
+}
+
+#pragma clang diagnostic pop

@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/IFTWT_RG.dir/main.cpp.o"
-  "IFTWT_RG.pdb"
   "IFTWT_RG"
+  "IFTWT_RG.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

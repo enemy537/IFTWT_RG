@@ -11,6 +11,7 @@
 #include "flat_point.hpp"
 #include "ift.hpp"
 #include "cluster.hpp"
+#include "graco.hpp"
 
 global::CloudI::Ptr cloudRGB2GRAY(global::CloudT::Ptr cloud)
 {
@@ -76,42 +77,53 @@ global::CloudI::Ptr cloudGray(global::CloudT::Ptr cloud)
 
 int main (int argc, char** argv) {
 
-    global::CloudI::Ptr cloud_i (new global::CloudI());
-    if ( pcl::io::loadPLYFile <global::PointI> ("../cloud/lucy_gray.ply", *cloud_i) == -1) {
+    global::CloudT::Ptr cloud_t (new global::CloudT());
+    if ( pcl::io::loadPLYFile <global::PointT> ("/home/pedro/Downloads/raw_curia/curia_small.ply",
+            *cloud_t) == -1) {
         std::cout << "Cloud reading failed." << std::endl;
         return (-1);
     }
 
-    Graph gg (cloud_i);
+    GraCo gc (cloud_t, 5.0);
+    global::CloudT::Ptr cloud_g (new pcl::PointCloud<pcl::PointXYZRGB>());
+    gc.morph_erode(cloud_g);
 
-    global::CloudI::Ptr cloud_g = gg.morph_gradient();
-    global::graph_t g = gg.pc_to_g(cloud_g);
-
-    pcl::search::Search<global::PointI>::Ptr tree =
-            boost::shared_ptr<pcl::search::Search<global::PointI> > (new pcl::search::KdTree<global::PointI>);
-    pcl::PointCloud <pcl::Normal>::Ptr normals (new pcl::PointCloud <pcl::Normal>);
-    pcl::NormalEstimationOMP<global::PointI, pcl::Normal> normal_estimator;
-    normal_estimator.setSearchMethod (tree);
-    normal_estimator.setInputCloud (cloud_g);
-    normal_estimator.setKSearch (30);
-    normal_estimator.compute (*normals);
-
-    FlatPoint<global::PointI, pcl::Normal> reg;
-    reg.setMinClusterSize (50);
-    reg.setMaxClusterSize (10000);
-    reg.setSearchMethod (tree);
-    reg.setNumberOfNeighbours (50);
-    reg.setInputCloud (cloud_g);
-    reg.setInputNormals (normals);
-    reg.setSmoothnessThreshold (3.0 / 180.0 * M_PI);
-    reg.setCurvatureThreshold (1.0);
-
-    global::Cloud::Ptr centroid_cloud = reg.getCentroidsCloud ();
-
-    IFT_PCD ift(g,centroid_cloud);
-    Cluster c(ift.getMST(),ift.getRoots(),ift.getGraph(),10);
-
-    global::CloudT::Ptr colored_cloud = c.getLabelCloud();
+//    global::CloudI::Ptr cloud_i (new global::CloudI());
+//    if ( pcl::io::loadPLYFile <global::PointI> ("../cloud/lucy_gray.ply", *cloud_i) == -1) {
+//        std::cout << "Cloud reading failed." << std::endl;
+//        return (-1);
+//    }
+//
+//    Graph gg (cloud_i);
+//
+//    global::CloudI::Ptr cloud_g = gg.morph_gradient();
+//    global::graph_t g = gg.pc_to_g(cloud_g);
+//
+//    pcl::search::Search<global::PointI>::Ptr tree =
+//            boost::shared_ptr<pcl::search::Search<global::PointI> > (new pcl::search::KdTree<global::PointI>);
+//    pcl::PointCloud <pcl::Normal>::Ptr normals (new pcl::PointCloud <pcl::Normal>);
+//    pcl::NormalEstimationOMP<global::PointI, pcl::Normal> normal_estimator;
+//    normal_estimator.setSearchMethod (tree);
+//    normal_estimator.setInputCloud (cloud_g);
+//    normal_estimator.setKSearch (30);
+//    normal_estimator.compute (*normals);
+//
+//    FlatPoint<global::PointI, pcl::Normal> reg;
+//    reg.setMinClusterSize (50);
+//    reg.setMaxClusterSize (10000);
+//    reg.setSearchMethod (tree);
+//    reg.setNumberOfNeighbours (50);
+//    reg.setInputCloud (cloud_g);
+//    reg.setInputNormals (normals);
+//    reg.setSmoothnessThreshold (3.0 / 180.0 * M_PI);
+//    reg.setCurvatureThreshold (1.0);
+//
+//    global::Cloud::Ptr centroid_cloud = reg.getCentroidsCloud ();
+//
+//    IFT_PCD ift(gg,centroid_cloud);
+//    Cluster c(ift.getMST(),ift.getRoots(),ift.getGraph(),10);
+//
+//    global::CloudT::Ptr colored_cloud = c.getLabelCloud();
 //
 //    pcl::io::savePLYFile("gradient.ply", *cloud_g);
 //    pcl::io::savePLYFile("labels.ply", *colored_cloud);
@@ -128,7 +140,7 @@ int main (int argc, char** argv) {
 
 
     pcl::visualization::CloudViewer viewer ("Cluster viewer");
-    viewer.showCloud(colored_cloud);
+    viewer.showCloud(cloud_g);
     while (!viewer.wasStopped ()) {}
 
 

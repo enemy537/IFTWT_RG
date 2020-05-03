@@ -34,7 +34,8 @@ namespace global{
     typedef pcl::PointCloud<PointT> CloudT;
     typedef pcl::PointXYZI PointI;
     typedef pcl::PointCloud<PointI> CloudI;
-    typedef boost::adjacency_list<boost::setS, boost::setS, boost::undirectedS, PointI, float> graph_t;
+    typedef boost::adjacency_list<boost::setS, boost::setS, boost::undirectedS, PointI, float> graph_i;
+    typedef boost::adjacency_list<boost::setS, boost::setS, boost::undirectedS, PointT, float> graph_t;
 
     /** boost types **/
     struct VertexBundle{
