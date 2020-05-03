@@ -8,15 +8,15 @@ Point Cloud segmentation techinique based on Watershed Transform implemented wit
 
 Build Platform           | Status
 ------------------------ | ------------------------------------------------------------------------------------------------- |
-Ubuntu                   | [![Status][ci-ubuntu-16.04]][ci-latest-build] <br> [![Status][ci-ubuntu-18.04]][ci-latest-build]  |
+Ubuntu                   | ci-ubuntu-16.04 <br> ci-ubuntu-18.04								     |
 
 
 ## Requirements
 
-GCC	 7.1 (supports OpenMP 4.5) *needed for parallelism
-CMake	 3.8
-PCL	 1.8
-OpenCV	 3.2
+1. GCC	 	 7.1 (supports OpenMP 4.5) *needed for parallelism
+2. CMake	 3.8
+3. PCL	 	 1.8
+4. OpenCV	 3.2
 
 ## Citation
 Please cite these papers in your publications if it helps your research.
